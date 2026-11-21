@@ -1,8 +1,8 @@
 {
-  "_catatan": "Bank suara Bahasa Indonesia. Edge TTS memakai suara neural asli id-ID (Ardi = pria, Gadis = wanita). Tiap profil dibedakan lewat rate (kecepatan) dan pitch (nada) supaya tiap tokoh terdengar berbeda. Ganti mapping 'characters' untuk mencoba profil lain.",
-  "engine": "edge",
-  "language": "id-ID",
+  "_catatan": "Bank suara untuk VoxCPM2 (Apache-2.0, 48 kHz, 30 bahasa incl. Indonesia). Voice design: deskripsi suara ditaruh di dalam tanda kurung di awal teks. Tiap profil punya 'description' + 'seed' supaya konsisten. Ganti mapping 'characters' untuk mencoba suara lain.",
+  "engine": "voxcpm2",
   "gap_ms": 300,
+  "timesteps": 8,
   "characters": {
     "NARATOR": "narator",
     "NAJMI": "najmi",
@@ -15,100 +15,84 @@
   },
   "bank": {
     "narator": {
-      "label": "Narator — pria, pelan, bersih",
-      "voice": "id-ID-ArdiNeural",
-      "rate": "-8%",
-      "pitch": "-3Hz"
+      "label": "Narator — pria Indonesia, tenang & hangat",
+      "description": "A calm Indonesian male narrator, middle-aged, warm steady voice",
+      "seed": 101
     },
     "najmi": {
-      "label": "Najmi — pria muda",
-      "voice": "id-ID-ArdiNeural",
-      "rate": "-4%",
-      "pitch": "+1Hz"
+      "label": "Najmi — remaja pria Indonesia, lembut",
+      "description": "A young Indonesian male, gentle curious voice, slightly soft spoken",
+      "seed": 102
     },
     "dimas": {
       "label": "Dimas — pria muda, gugup & cepat",
-      "voice": "id-ID-ArdiNeural",
-      "rate": "+12%",
-      "pitch": "+9Hz"
+      "description": "A nervous young Indonesian male, higher pitched, quick anxious speech",
+      "seed": 103
     },
     "siska": {
       "label": "Siska — wanita muda, tajam",
-      "voice": "id-ID-GadisNeural",
-      "rate": "+2%",
-      "pitch": "+5Hz"
+      "description": "An intelligent Indonesian young woman, crisp clear voice, slightly sharp tone",
+      "seed": 104
     },
     "pak_hendra": {
       "label": "Pak Hendra — pria dewasa, berat",
-      "voice": "id-ID-ArdiNeural",
-      "rate": "-15%",
-      "pitch": "-9Hz"
+      "description": "A deep voiced middle-aged Indonesian man, slow steady deliberate speech",
+      "seed": 105
     },
     "bu_rina": {
       "label": "Bu Rina — wanita dewasa, hangat",
-      "voice": "id-ID-GadisNeural",
-      "rate": "-5%",
-      "pitch": "-4Hz"
+      "description": "A warm middle-aged Indonesian woman, gentle motherly voice, unhurried",
+      "seed": 106
     },
     "arka": {
       "label": "Arka — remaja pria, energik",
-      "voice": "id-ID-ArdiNeural",
-      "rate": "+6%",
-      "pitch": "+8Hz"
+      "description": "An energetic Indonesian teenage boy, bright lively voice, fast paced",
+      "seed": 107
     },
     "sera": {
       "label": "Komandan Sera — wanita berwibawa, pelan",
-      "voice": "id-ID-GadisNeural",
-      "rate": "-18%",
-      "pitch": "-6Hz"
+      "description": "A commanding Indonesian woman, calm authoritative voice, slow and composed",
+      "seed": 108
     },
-    "ardi_netral": {
-      "label": "Ardi Netral — alternatif",
-      "voice": "id-ID-ArdiNeural",
-      "rate": "+0%",
-      "pitch": "+0Hz"
+    "pria_tua": {
+      "label": "Pria Tua — alternatif",
+      "description": "An elderly Indonesian man, low raspy voice, very slow",
+      "seed": 201
     },
-    "ardi_dalam": {
-      "label": "Ardi Dalam — alternatif suara rendah",
-      "voice": "id-ID-ArdiNeural",
-      "rate": "-10%",
-      "pitch": "-12Hz"
+    "wanita_tua": {
+      "label": "Wanita Tua — alternatif",
+      "description": "An elderly Indonesian woman, soft fragile voice, slow",
+      "seed": 202
     },
-    "ardi_muda": {
-      "label": "Ardi Muda — alternatif tinggi",
-      "voice": "id-ID-ArdiNeural",
-      "rate": "+8%",
-      "pitch": "+12Hz"
+    "anak_laki": {
+      "label": "Anak Laki — alternatif",
+      "description": "A young Indonesian boy, high pitched playful voice",
+      "seed": 203
     },
-    "ardi_sangat_pelan": {
-      "label": "Ardi Sangat Pelan — alternatif",
-      "voice": "id-ID-ArdiNeural",
-      "rate": "-25%",
-      "pitch": "-2Hz"
+    "anak_perempuan": {
+      "label": "Anak Perempuan — alternatif",
+      "description": "A young Indonesian girl, high pitched bright voice",
+      "seed": 204
     },
-    "gadis_netral": {
-      "label": "Gadis Netral — alternatif",
-      "voice": "id-ID-GadisNeural",
-      "rate": "+0%",
-      "pitch": "+0Hz"
+    "pria_berbisik": {
+      "label": "Pria Berbisik — alternatif",
+      "description": "An Indonesian male whispering, low intimate voice",
+      "seed": 205
     },
-    "gadis_tinggi": {
-      "label": "Gadis Tinggi — alternatif",
-      "voice": "id-ID-GadisNeural",
-      "rate": "+6%",
-      "pitch": "+10Hz"
+    "wanita_berbisik": {
+      "label": "Wanita Berbisik — alternatif",
+      "description": "An Indonesian female whispering, soft intimate voice",
+      "seed": 206
     },
-    "gadis_rendah": {
-      "label": "Gadis Rendah — alternatif",
-      "voice": "id-ID-GadisNeural",
-      "rate": "-8%",
-      "pitch": "-10Hz"
+    "pria_netral": {
+      "label": "Pria Netral — alternatif",
+      "description": "A neutral Indonesian male voice, conversational, moderate pace",
+      "seed": 207
     },
-    "gadis_sangat_pelan": {
-      "label": "Gadis Sangat Pelan — alternatif",
-      "voice": "id-ID-GadisNeural",
-      "rate": "-22%",
-      "pitch": "-3Hz"
+    "wanita_netral": {
+      "label": "Wanita Netral — alternatif",
+      "description": "A neutral Indonesian female voice, conversational, moderate pace",
+      "seed": 208
     }
   }
 }
