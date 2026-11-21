@@ -1,20 +1,17 @@
 #!/usr/bin/env python3
-"""Buat voiceover Najmi dengan Edge TTS (suara Indonesia asli).
+"""Buat voiceover Najmi dengan VoxCPM2 (llama.cpp-omni, CPU).
 
-- Satu MP3 per baris: out/voices/<id>.mp3
+- Satu WAV per baris: out/voices/<id>.wav (24 kHz mono)
 - Satu MP3 gabungan urut naskah: out/voiceover_najmi_lengkap.mp3
-- dur.json: durasi tiap baris (sumber timing untuk animasi)
+- dur.json: durasi tiap baris untuk pipeline animasi
 """
 
 from __future__ import annotations
 
 import argparse
-import asyncio
 import json
 import subprocess
 from pathlib import Path
-
-import edge_tts
 
 
 def run(cmd: list[str], cwd: Path | None = None) -> None:
@@ -36,18 +33,26 @@ def ffprobe_duration(path: Path) -> float:
     return round(float(result.stdout.strip()), 3)
 
 
-async def synthesize(
-    text: str, voice: str, rate: str, pitch: str, output: Path
-) -> None:
-    comm = edge_tts.Communicate(text, voice, rate=rate, pitch=pitch)
-    await comm.save(str(output))
+def parse_args() -> argparse.Namespace:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--lines", default="voiceover/lines_najmi_ep03.json")
+    parser.add_argument("--voices", default="voiceover/voices.json")
+    parser.add_argument("--out-dir", default="voiceover/out")
+    parser.add_argument("--cli", required=True, help="Path ke voxcpm2-cli")
+    parser.add_argument("--base-lm", required=True, help="Path ke BaseLM GGUF")
+    parser.add_argument("--acoustic", required=True, help="Path ke Acoustic GGUF")
+    parser.add_argument("--ids", nargs="*", default=None, help="Batasi id tertentu")
+    return parser.parse_args()
 
 
-async def main_async(args: argparse.Namespace) -> None:
+def main() -> None:
+    args = parse_args()
+
     lines = json.loads(Path(args.lines).read_text(encoding="utf-8"))
     cfg = json.loads(Path(args.voices).read_text(encoding="utf-8"))
     bank = cfg["bank"]
     char_map = cfg["characters"]
+    timesteps = int(cfg.get("timesteps", 8))
     gap_ms = int(cfg.get("gap_ms", 300))
 
     if args.ids:
@@ -60,7 +65,7 @@ async def main_async(args: argparse.Namespace) -> None:
     wav_dir = out_dir / "voices"
     wav_dir.mkdir(parents=True, exist_ok=True)
 
-    print(f"Membuat {len(lines)} klip dengan Edge TTS ...", flush=True)
+    print(f"Membuat {len(lines)} klip dengan VoxCPM2 ...", flush=True)
 
     durations: dict[str, float] = {}
     for index, line in enumerate(lines, start=1):
@@ -69,82 +74,85 @@ async def main_async(args: argparse.Namespace) -> None:
         profile_id = char_map.get(who) or char_map.get(who.upper()) or "najmi"
         profile = bank[profile_id]
 
-        raw = wav_dir / f"__raw_{line_id}.mp3"
-        final = wav_dir / f"{line_id}.mp3"
+        prompt = f"({profile['description']}){line['text']}"
+        raw = wav_dir / f"__raw_{line_id}.wav"
+        final = wav_dir / f"{line_id}.wav"
 
-        await synthesize(
-            line["text"],
-            profile["voice"],
-            profile.get("rate", "+0%"),
-            profile.get("pitch", "+0Hz"),
-            raw,
+        run(
+            [
+                str(args.cli),
+                "-t", prompt,
+                "-o", str(raw),
+                "--cpu",
+                "--timesteps", str(timesteps),
+                "--seed", str(int(profile["seed"])),
+                str(args.base_lm),
+                str(args.acoustic),
+            ]
         )
 
         cmd = ["ffmpeg", "-y", "-loglevel", "error", "-i", str(raw)]
         if line.get("lowpass_7k"):
             cmd += ["-af", "lowpass=f=7000"]
-        cmd += ["-ar", "24000", "-ac", "1", "-q:a", "2", str(final)]
+        cmd += ["-ar", "24000", "-ac", "1", str(final)]
         run(cmd)
         raw.unlink(missing_ok=True)
 
         durations[line_id] = ffprobe_duration(final)
         print(
             f"[{index}/{len(lines)}] {line_id} ({who}) -> {profile_id} "
-            f"[{profile['voice']} {profile.get('rate')} {profile.get('pitch')}] "
             f"{durations[line_id]}s",
             flush=True,
         )
 
-    # Jeda antar baris
-    silence = wav_dir / "__silence.mp3"
+    silence = wav_dir / "__silence.wav"
     run(
         [
             "ffmpeg", "-y", "-loglevel", "error",
             "-f", "lavfi", "-i", "anullsrc=r=24000:cl=mono",
             "-t", f"{gap_ms / 1000:.3f}",
-            "-ar", "24000", "-ac", "1", "-q:a", "2", str(silence),
+            "-ar", "24000", "-ac", "1", str(silence),
         ]
     )
 
-    # Daftar concat sesuai urutan naskah
     concat_list = out_dir / "__concat.txt"
     entries: list[str] = []
     for index, line in enumerate(lines):
-        entries.append(f"file 'voices/{line['id']}.mp3'")
+        entries.append(f"file 'voices/{line['id']}.wav'")
         if index < len(lines) - 1:
-            entries.append(f"file 'voices/__silence.mp3'")
+            entries.append("file 'voices/__silence.wav'")
     concat_list.write_text("\n".join(entries) + "\n", encoding="utf-8")
 
-    merged = out_dir / "voiceover_najmi_lengkap.mp3"
+    merged_wav = out_dir / "__merged.wav"
     run(
         [
             "ffmpeg", "-y", "-loglevel", "error",
             "-f", "concat", "-safe", "0",
             "-i", str(concat_list),
-            "-c:a", "libmp3lame", "-q:a", "2", str(merged),
+            "-c:a", "pcm_s16le", str(merged_wav),
+        ]
+    )
+    merged_mp3 = out_dir / "voiceover_najmi_lengkap.mp3"
+    run(
+        [
+            "ffmpeg", "-y", "-loglevel", "error",
+            "-i", str(merged_wav),
+            "-codec:a", "libmp3lame", "-q:a", "2", str(merged_mp3),
         ]
     )
     concat_list.unlink(missing_ok=True)
     silence.unlink(missing_ok=True)
+    merged_wav.unlink(missing_ok=True)
 
     (out_dir / "dur.json").write_text(
         json.dumps(durations, indent=2, ensure_ascii=False), encoding="utf-8"
     )
     print(
         f"Selesai: {len(durations)} klip, "
-        f"{ffprobe_duration(merged)} detik total -> {merged}",
+        f"{ffprobe_duration(merged_mp3)} detik total -> {merged_mp3}",
         flush=True,
     )
 
 
-def parse_args() -> argparse.Namespace:
-    parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--lines", default="voiceover/lines_najmi_ep03.json")
-    parser.add_argument("--voices", default="voiceover/voices.json")
-    parser.add_argument("--out-dir", default="voiceover/out")
-    parser.add_argument("--ids", nargs="*", default=None, help="Batasi id tertentu")
-    return parser.parse_args()
-
-
 if __name__ == "__main__":
-    asyncio.run(main_async(parse_args()))
+    main()
