@@ -1,4 +1,4 @@
-name: Voiceover Najmi (VoiceStudio / OmniVoice)
+name: Voiceover Najmi (Edge TTS)
 
 # Semua logika ada di folder voiceover/. File ini hanya penempatan yang
 # diwajibkan GitHub (workflow harus di .github/workflows/ di root repo).
@@ -23,13 +23,10 @@ concurrency:
   group: voiceover-${{ github.ref }}
   cancel-in-progress: true
 
-env:
-  OMNIVOICE_VERSION: '0.2.1'
-
 jobs:
   generate:
     runs-on: ubuntu-latest
-    timeout-minutes: 180
+    timeout-minutes: 30
 
     steps:
       - name: Checkout repo
@@ -48,21 +45,10 @@ jobs:
           fi
           ffmpeg -version | head -n 1
 
-      - name: Install PyTorch (CPU) + OmniVoice
-        run: |
-          python -m pip install --upgrade pip
-          pip install torch==2.8.0 torchaudio==2.8.0 \
-            --index-url https://download.pytorch.org/whl/cpu
-          pip install "omnivoice==${OMNIVOICE_VERSION}"
+      - name: Install Edge TTS
+        run: pip install edge-tts
 
-      - name: Cache bobot model OmniVoice
-        id: hf-cache
-        uses: actions/cache@v4
-        with:
-          path: ~/.cache/huggingface
-          key: omnivoice-k2-fsa-v1
-
-      - name: Buat voiceover per baris
+      - name: Buat voiceover per baris + MP3 gabungan
         run: |
           IDS="${{ github.event.inputs.ids || '' }}"
           if [ -n "$IDS" ]; then
@@ -71,9 +57,10 @@ jobs:
             python voiceover/generate_voiceover.py
           fi
 
-      - name: Ringkasan durasi
+      - name: Ringkasan
         run: |
-          echo "Jumlah klip: $(find voiceover/out/voices -name '*.wav' | wc -l)"
+          ls -lh voiceover/out/voiceover_najmi_lengkap.mp3
+          echo "Jumlah klip: $(find voiceover/out/voices -name '*.mp3' ! -name '__*' | wc -l)"
           cat voiceover/out/dur.json
 
       - name: Upload artifact
