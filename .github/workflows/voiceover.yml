@@ -1,0 +1,85 @@
+name: Voiceover Najmi (VoiceStudio / OmniVoice)
+
+# Semua logika ada di folder voiceover/. File ini hanya penempatan yang
+# diwajibkan GitHub (workflow harus di .github/workflows/ di root repo).
+on:
+  push:
+    paths:
+      - 'voiceover/lines_najmi_ep03.json'
+      - 'voiceover/voices.json'
+      - 'voiceover/generate_voiceover.py'
+      - '.github/workflows/voiceover.yml'
+  workflow_dispatch:
+    inputs:
+      ids:
+        description: 'Batasi id, mis. n01 j01 d01 (kosong = semua baris)'
+        required: false
+        default: ''
+
+permissions:
+  contents: read
+
+concurrency:
+  group: voiceover-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  OMNIVOICE_VERSION: '0.2.1'
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 180
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Pastikan ffmpeg tersedia
+        run: |
+          if ! command -v ffmpeg >/dev/null 2>&1; then
+            sudo apt-get update
+            sudo apt-get install -y ffmpeg
+          fi
+          ffmpeg -version | head -n 1
+
+      - name: Install PyTorch (CPU) + OmniVoice
+        run: |
+          python -m pip install --upgrade pip
+          pip install torch==2.8.0 torchaudio==2.8.0 \
+            --index-url https://download.pytorch.org/whl/cpu
+          pip install "omnivoice==${OMNIVOICE_VERSION}"
+
+      - name: Cache bobot model OmniVoice
+        id: hf-cache
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/huggingface
+          key: omnivoice-k2-fsa-v1
+
+      - name: Buat voiceover per baris
+        run: |
+          IDS="${{ github.event.inputs.ids || '' }}"
+          if [ -n "$IDS" ]; then
+            python voiceover/generate_voiceover.py --ids $IDS
+          else
+            python voiceover/generate_voiceover.py
+          fi
+
+      - name: Ringkasan durasi
+        run: |
+          echo "Jumlah klip: $(find voiceover/out/voices -name '*.wav' | wc -l)"
+          cat voiceover/out/dur.json
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: suara-najmi-${{ github.sha }}
+          path: voiceover/out/
+          if-no-files-found: error
+          retention-days: 30
