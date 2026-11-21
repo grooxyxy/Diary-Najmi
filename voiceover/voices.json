@@ -1,0 +1,138 @@
+{
+  "_catatan": "Bank suara Bahasa Indonesia untuk OmniVoice (mesin default VoiceStudio). Voice design memakai atribut tetap: gender, age, pitch, style. Seed bikin tiap suara konsisten. Ganti mapping di 'characters' untuk mencoba suara lain dari 'bank'.",
+  "language": "id",
+  "num_step": 16,
+  "default_speed": 0.86,
+  "characters": {
+    "NARATOR": "zephlyn",
+    "NAJMI": "zephlyn",
+    "DIMAS": "dimas_gugup",
+    "SISKA": "siska_tajam",
+    "PAK HENDRA": "pak_hendra",
+    "BU RINA": "bu_rina",
+    "ARKA": "arka_energik",
+    "KOMANDAN SERA": "sera_wibawa"
+  },
+  "bank": {
+    "zephlyn": {
+      "label": "Zephlyn — narator muda, tenang",
+      "instruct": "female, young adult, moderate pitch",
+      "seed": 11
+    },
+    "zephlyn_low": {
+      "label": "Zephlyn Low — versi lebih rendah",
+      "instruct": "female, young adult, low pitch",
+      "seed": 12
+    },
+    "dimas_gugup": {
+      "label": "Dimas — pria muda, gugup",
+      "instruct": "male, young adult, high pitch",
+      "seed": 22
+    },
+    "dimas_pelan": {
+      "label": "Dimas Pelan — alternatif",
+      "instruct": "male, young adult, moderate pitch",
+      "seed": 23
+    },
+    "siska_tajam": {
+      "label": "Siska — perempuan muda, tajam",
+      "instruct": "female, young adult, high pitch",
+      "seed": 33
+    },
+    "siska_tenang": {
+      "label": "Siska Tenang — alternatif",
+      "instruct": "female, young adult, moderate pitch",
+      "seed": 34
+    },
+    "pak_hendra": {
+      "label": "Pak Hendra — pria dewasa, berat",
+      "instruct": "male, middle-aged, very low pitch",
+      "seed": 44
+    },
+    "pak_hendra_muda": {
+      "label": "Pak Hendra Muda — alternatif",
+      "instruct": "male, young adult, low pitch",
+      "seed": 45
+    },
+    "bu_rina": {
+      "label": "Bu Rina — perempuan dewasa, hangat",
+      "instruct": "female, middle-aged, moderate pitch",
+      "seed": 55
+    },
+    "bu_rina_lembut": {
+      "label": "Bu Rina Lembut — alternatif",
+      "instruct": "female, middle-aged, low pitch",
+      "seed": 56
+    },
+    "arka_energik": {
+      "label": "Arka — remaja pria, energik",
+      "instruct": "male, teenager, very high pitch",
+      "seed": 66
+    },
+    "arka_santai": {
+      "label": "Arka Santai — alternatif",
+      "instruct": "male, teenager, high pitch",
+      "seed": 67
+    },
+    "sera_wibawa": {
+      "label": "Komandan Sera — perempuan berwibawa, pelan",
+      "instruct": "female, middle-aged, low pitch",
+      "seed": 77
+    },
+    "sera_tua": {
+      "label": "Sera Tua — alternatif",
+      "instruct": "female, elderly, very low pitch",
+      "seed": 78
+    },
+    "anak_a": {
+      "label": "Anak A — child",
+      "instruct": "female, child, high pitch",
+      "seed": 101
+    },
+    "anak_b": {
+      "label": "Anak B — child",
+      "instruct": "male, child, moderate pitch",
+      "seed": 102
+    },
+    "remaja_putri": {
+      "label": "Remaja Putri",
+      "instruct": "female, teenager, high pitch",
+      "seed": 103
+    },
+    "remaja_putra": {
+      "label": "Remaja Putra",
+      "instruct": "male, teenager, moderate pitch",
+      "seed": 104
+    },
+    "pria_tua": {
+      "label": "Pria Tua",
+      "instruct": "male, elderly, low pitch",
+      "seed": 105
+    },
+    "perempuan_tua": {
+      "label": "Perempuan Tua",
+      "instruct": "female, elderly, moderate pitch",
+      "seed": 106
+    },
+    "berbisik_putri": {
+      "label": "Bisikan Perempuan",
+      "instruct": "female, young adult, whisper",
+      "seed": 107
+    },
+    "berbisik_pria": {
+      "label": "Bisikan Pria",
+      "instruct": "male, young adult, whisper",
+      "seed": 108
+    },
+    "pria_sangat_rendah": {
+      "label": "Pria Sangat Rendah",
+      "instruct": "male, middle-aged, very low pitch",
+      "seed": 109
+    },
+    "wanita_sangat_tinggi": {
+      "label": "Wanita Sangat Tinggi",
+      "instruct": "female, young adult, very high pitch",
+      "seed": 110
+    }
+  }
+}
