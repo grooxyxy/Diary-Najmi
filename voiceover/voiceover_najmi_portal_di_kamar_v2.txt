@@ -1,0 +1,86 @@
+NAJMI - EPISODE 03: PORTAL DI KAMAR NAJMI
+VOICEOVER VERSI 2 (hanya dialog, siap untuk text-to-speech multi-speaker; selaras dengan lines_najmi_ep03.json)
+Target durasi: ~2:35 (206 kata). Narasi lambat (speed ~0,86); karakter di-low-pass ~7 kHz di mix.
+
+PEMBAGIAN SUARA
+- NARATOR dan NAJMI : Zephlyn (satu suara yang sama; NARATOR bersih, NAJMI saat berdialog dibuat "di dalam dunia")
+- DIMAS, SISKA, PAK HENDRA, BU RINA, ARKA, KOMANDAN SERA : pilih suara berbeda tiap karakter
+- TTS bawaan kit TIDAK dipakai. Hasilkan audio di layanan eksternal Anda, satu file per baris, dinamai sesuai id di lines_najmi_ep03.json (n01.wav, j01.wav, ...). Lalu jalankan import_voice.py.
+
+BACAAN
+NARATOR: Namaku Najmi. Malam itu, dinding kamarku retak,
+
+NARATOR: bercahaya, lalu terbuka jadi portal.
+
+NARATOR: Di seberangnya: dunia masa depan setelah kiamat.
+
+NAJMI: Tunggu... ini emas? Dipakai buat ganjal pintu?
+
+NARATOR: Di sana, emas cuma sampah. Ambil, lalu jual di duniaku.
+
+PAK HENDRA: Emas murni. Kamu dapat dari mana, Mi?
+
+NAJMI: Warisan kakek buyut, Pak.
+
+SISKA: Najmi, kamu menyembunyikan sesuatu. Cerita!
+
+NAJMI: Di kamarku ada portal.
+
+DIMAS: PORTAL?!
+
+NARATOR: Kami masuk bertiga. Tiba-tiba, mecha raksasa muncul.
+
+DIMAS: Aku mau pulang. Aku mau pulang.
+
+ARKA: Berhenti! Kalian dari mana?
+
+NAJMI: Dari dunia lain. Lewat portal.
+
+NARATOR: Namanya Arka. Ia membawa kami ke Kota Aurora.
+
+ARKA: Tapi kami tak bisa menumbuhkan satu butir padi pun.
+
+KOMANDAN SERA: Emas silakan ambil. Tapi tukarkan dengan makanan dari duniamu.
+
+NARATOR: Aku bisa jadi orang terkaya di Gang Kenanga.
+
+NARATOR: Tapi aku ingat mata Arka saat menyebut padi.
+
+SISKA: Ada beda antara berdagang dan memeras, Mi.
+
+NAJMI: Aku jual dengan harga adil. Yang tidak mampu, kubantu.
+
+BU RINA: Pakai gudang belakang, Nak. Ibu tidak akan bertanya.
+
+NARATOR: Tapi faksi lain di Aurora ingin merebut portal.
+
+ARKA: Mereka mau menguasai semua makanan!
+
+NARATOR: Aku menutup mata, menenangkan diri.
+
+NARATOR: Portal ternyata bereaksi pada niatku.
+
+NARATOR: Sejak itu, portal hanya terbuka bagi niat baik.
+
+NARATOR: Kini kubawa beras, air, dan bibit padi.
+
+KOMANDAN SERA: Tanah kami mulai hijau. Terima kasih.
+
+NARATOR: Harga sesuatu tergantung di mana kamu berdiri.
+
+NARATOR: Malam itu, portal berkedip biru.
+
+NARATOR: Sepertinya petualangan ini belum selesai.
+
+CATATAN BACA (jangan dibaca keras)
+- Hening 1: jeda ~1 detik setelah Sera (sebelum n09). Hening 2: jeda ~1,5 detik sebelum n12.
+- PORTAL?! = teriak kaget, tetap singkat. "Aku mau pulang" diucapkan dua kali, kedua kali lebih lirih.
+- "mecha" dibaca "meka".
+
+ALUR VOICEOVER EKSTERNAL
+1. Hasilkan/rekam tiap baris (urutan dan id ada di lines_najmi_ep03.json). Satu baris = satu file, tanpa musik. Narator pelan (setara speed ~0,86).
+2. Taruh semua file di satu folder, mis. audio_saya/.
+3. python import_voice.py lines_najmi_ep03.json audio_saya out/voices --lowpass
+   (membuat out/voices/<id>.wav 24 kHz mono + dur.json; baris tokoh di-low-pass 7 kHz, narator tidak)
+4. Langkah kit berikutnya (timing, mix, render) memakai out/voices dan dur.json seperti biasa. Jangan jalankan tts.py / tts_zh.py.
+5. Cek hasil: dengarkan tiap klip; durasi asli dari dur.json menggantikan perkiraan di naskah (t_est). Bila klip lebih panjang dari perkiraan, geser mulai klip berikutnya agar tiap teks tampil minimal max(1,8 dtk; durasi + 0,6 dtk).
