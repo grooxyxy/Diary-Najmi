@@ -1,51 +1,63 @@
-# Voiceover Najmi — Edge TTS (Bahasa Indonesia)
+# Voiceover Najmi — VoxCPM2
 
 Folder ini berisi pipeline voiceover Episode 03. Semua file ada di sini supaya tidak bercampur dengan aset animasi. Satu-satunya file di luar folder adalah `.github/workflows/voiceover.yml` — GitHub mewajibkan workflow berada di path itu, dan isinya hanya memanggil script di folder ini.
 
-## Kenapa pindah dari OmniVoice ke Edge TTS
+## Mesin: VoxCPM2
 
-OmniVoice (mesin VoiceStudio) memang mendukung `language: id`, tetapi mode **voice design**-nya dilatih di bahasa Inggris/Mandarin. Hasilnya: pelafalan Indonesia terdengar seperti Inggris. Di samping itu mapping `NAJMI` sebelumnya salah memakai profil `zephlyn` (perempuan).
+| | |
+|---|---|
+| Model | `openbmb/VoxCPM2` (2B tokenizer-free diffusion TTS) |
+| Lisensi | **Apache-2.0** — boleh komersial |
+| Bahasa | 30 bahasa termasuk **Bahasa Indonesia** |
+| Kualitas | 48 kHz, voice design dari deskripsi teks, cloning dari referensi |
+| Runtime | GGUF Q8_0 + Acoustic F16 lewat `llama.cpp-omni` (`voxcpm2-cli`), **CPU** di runner GitHub |
 
-Edge TTS memakai suara neural **Indonesia asli**:
+Kenapa bukan Edge TTS/OmniVoice lagi: Edge TTS terdengar robot, sementara voice design OmniVoice dilatih di EN/ZH sehingga aksennya Inggris. VoxCPM2 punya **voice design berbahasa bebas** dan dukungan Indonesia yang baik, tanpa layanan berbayar.
 
-- `id-ID-ArdiNeural` — pria
-- `id-ID-GadisNeural` — wanita
+## Bank suara
 
-Keduanya gratis, tanpa API key, tanpa unduh model. Tiap tokoh dibedakan lewat `rate` (kecepatan) dan `pitch` (nada), jadi tetap ada bank suara tanpa mengorbankan pelafalan. **Najmi sekarang bersuara pria.**
+`voices.json` berisi 16 profil. Tiap profil punya:
+- `description` — deskripsi suara dalam kurung, diletakkan di awal teks (voice design VoxCPM2)
+- `seed` — biar hasil konsisten
+
+Mapping `characters` menentukan suara tiap tokoh:
+- **Najmi & Narator: pria** (profil `najmi` dan `narator`)
+- Dimas: pria muda gugup · Siska: wanita tajam · Pak Hendra: pria berat · Bu Rina: wanita hangat · Arka: remaja energik · Sera: wanita berwibawa
 
 ## Isi folder
 
 | File | Fungsi |
 |---|---|
-| `lines_najmi_ep03.json` | 32 baris dialog/narasi (id, who, text, lowpass_7k, file) — dari `Apoc` |
+| `lines_najmi_ep03.json` | 32 baris dialog/narasi — dari `Apoc` |
 | `voiceover_najmi_portal_di_kamar_v2.txt` | naskah sumber |
-| `voices.json` | 16 profil suara + mapping karakter → profil, jeda antar baris |
-| `generate_voiceover.py` | generate MP3 per baris, lalu gabungkan sesuai urutan naskah |
-| `out/voices/<id>.mp3` | klip per baris (24 kHz mono;dialog di-low-pass 7 kHz) |
+| `voices.json` | deskripsi suara + mapping tokoh + jeda |
+| `generate_voiceover.py` | panggil CLI per baris, gabungkan urut naskah, tulis `dur.json` |
+| `out/voices/<id>.wav` | klip per baris (24 kHz mono; dialog di-low-pass 7 kHz) |
 | `out/voiceover_najmi_lengkap.mp3` | **satu MP3 gabungan, urut sesuai naskah VO** |
-| `out/dur.json` | durasi tiap id, kompatibel dengan `import_voice.py` |
+| `out/dur.json` | durasi tiap id untuk timing animasi |
 
 ## Cara jalan
 
 1. Push perubahan ke file di `voiceover/` → workflow jalan otomatis.
-2. Atau **Actions → Voiceover Najmi (Edge TTS) → Run workflow**. Isi `ids` untuk generate sebagian, misalnya `n01 j01 d01`; kosongkan untuk semua.
+2. Atau **Actions → Voiceover Najmi (VoxCPM2) → Run workflow**. Isi `ids` untuk generate sebagian; kosongkan untuk semua.
 3. Download artifact `suara-najmi-<sha>.zip`. File utama: `voiceover_najmi_lengkap.mp3`.
 
-## Mengubah suara
+## Kustomisasi
 
-Buka `voices.json`:
-- `characters` — petakan tokoh ke profil mana.
-- `bank` — tiap profil punya `voice`, `rate` (mis. `-8%` lebih pelan, `+10%` lebih cepat), dan `pitch` (mis. `-9Hz` lebih rendah, `+9Hz` lebih tinggi).
-- `gap_ms` — jeda antar baris di MP3 gabungan (default `300`).
+Edit `voiceover/voices.json`:
+- `characters` → ganti tokoh ke profil lain
+- `bank.<profil>.description` → ubah karakter suara, misalnya `"A cheerful Indonesian teenage girl, bright voice"`
+- `bank.<profil>.seed` → coba variasi lain dari deskripsi yang sama
+- `gap_ms` → jeda antar baris di MP3 gabungan (default `300`)
+- `timesteps` → makin tinggi makin halus tapi makin lama (default `8`, nilai model default `10`)
 
-Contoh: kalau Dimas kurang gugup, naikkan `rate` jadi `+18%` dan `pitch` `+14Hz`.
+## Catatan operasional
 
-## Catatan
-
-- Edge TTS adalah layanan online gratis dari Microsoft (bukan model lokal). Tidak ada data yang disimpan di luar runner GitHub.
-- `dur.json` menggantikan `t_est` di naskah untuk timing animasi.
-- Jeda antar baris bisa diubah lewat `gap_ms`; kalau mau tanpa jeda, set `0`.
+- Run pertama mengunduh GGUF ±3,5 GB dan meng-compile `voxcpm2-cli`. Cache HuggingFace disimpan antar run, jadi run berikutnya jauh lebih cepat.
+- Inference CPU untuk 32 klip bisa memakan waktu beberapa menit. Workflow pakai timeout 120 menit.
+- Voice design kadang butuh 2–3 percobaan (`seed` berbeda) untuk mendapat karakter yang pas. Ini normal untuk model generatif.
+- `dur.json` menggantikan `t_est` di naskah untuk timing animasi; jeda bisa diubah lewat `gap_ms`.
 
 ## Lisensi & etika
 
-`edge-tts` adalah pustaka MIT; suara berasal dari layanan Microsoft Edge. Gunakan sesuai ketentuan layanan mereka, dan jangan meniru suara orang tertentu tanpa izin.
+Model dan kode VoxCPM2: Apache-2.0 (komersial dipsilkan). `llama.cpp-omni`: MIT. Tetap gunakan suara secara etis — jangan meniru suara orang tanpa izin.
