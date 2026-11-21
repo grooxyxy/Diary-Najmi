@@ -1,44 +1,51 @@
-# Voiceover Najmi — VoiceStudio / OmniVoice
+# Voiceover Najmi — Edge TTS (Bahasa Indonesia)
 
-Folder ini berisi pipeline voiceover untuk Episode 03. Semua file ada di sini supaya tidak bercampur dengan aset animasi. Satu-satunya file di luar folder adalah `.github/workflows/voiceover.yml` — GitHub mewajibkan workflow berada di path itu, tetapi isinya hanya memanggil script di folder ini.
+Folder ini berisi pipeline voiceover Episode 03. Semua file ada di sini supaya tidak bercampur dengan aset animasi. Satu-satunya file di luar folder adalah `.github/workflows/voiceover.yml` — GitHub mewajibkan workflow berada di path itu, dan isinya hanya memanggil script di folder ini.
 
-## Mesin yang dipakai
+## Kenapa pindah dari OmniVoice ke Edge TTS
 
-**OmniVoice** (`k2-fsa/OmniVoice`) — mesin default **VoiceStudio**, alternatif ElevenLabs open-source.
+OmniVoice (mesin VoiceStudio) memang mendukung `language: id`, tetapi mode **voice design**-nya dilatih di bahasa Inggris/Mandarin. Hasilnya: pelafalan Indonesia terdengar seperti Inggris. Di samping itu mapping `NAJMI` sebelumnya salah memakai profil `zephlyn` (perempuan).
 
-- 646 bahasa, termasuk **Bahasa Indonesia** (`language: id`).
-- **Voice design**: suara dibentuk dari atribut (gender, age, pitch, style) + seed. Tidak perlu audio referensi, tidak perlu API key, tidak perlu akun.
-- Di `voices.json` ada **24 profil suara** siap pakai (zephlyn, dimas_gugup, siska_tajam, pak_hendra, bu_rina, arka_energik, sera_wibawa, + 16 alternatif). Tinggal ganti mapping `characters` untuk mencoba suara lain.
-- Code OmniVoice Apache-2.0. **Bobot model CC-BY-NC (non-komercial)** — periksa kembali sebelum dipakai untuk proyek komersial. Voice design juga dilatih di EN/ZH, jadi hasil Indonesia kadang perlu beberapa percobaan; untuk hasil paling stabil bisa pakai mode cloning dengan audio referensi.
+Edge TTS memakai suara neural **Indonesia asli**:
+
+- `id-ID-ArdiNeural` — pria
+- `id-ID-GadisNeural` — wanita
+
+Keduanya gratis, tanpa API key, tanpa unduh model. Tiap tokoh dibedakan lewat `rate` (kecepatan) dan `pitch` (nada), jadi tetap ada bank suara tanpa mengorbankan pelafalan. **Najmi sekarang bersuara pria.**
 
 ## Isi folder
 
 | File | Fungsi |
 |---|---|
-| `lines_najmi_ep03.json` | 30 baris dialog/narasi (id, who, text, lowpass_7k, file) — disalin dari `Apoc` |
+| `lines_najmi_ep03.json` | 32 baris dialog/narasi (id, who, text, lowpass_7k, file) — dari `Apoc` |
 | `voiceover_najmi_portal_di_kamar_v2.txt` | naskah sumber |
-| `voices.json` | bank suara + mapping karakter → profil suara + kecepatan |
-| `generate_voiceover.py` | generate satu WAV per id, lowpass 7 kHz untuk tokoh, tulis `dur.json` |
-| `out/voices/<id>.wav` | hasil (dibuat workflow, 24 kHz mono) |
-| `out/dur.json` | durasi tiap id, format sama seperti keluaran `import_voice.py` |
+| `voices.json` | 16 profil suara + mapping karakter → profil, jeda antar baris |
+| `generate_voiceover.py` | generate MP3 per baris, lalu gabungkan sesuai urutan naskah |
+| `out/voices/<id>.mp3` | klip per baris (24 kHz mono;dialog di-low-pass 7 kHz) |
+| `out/voiceover_najmi_lengkap.mp3` | **satu MP3 gabungan, urut sesuai naskah VO** |
+| `out/dur.json` | durasi tiap id, kompatibel dengan `import_voice.py` |
 
 ## Cara jalan
 
-1. Push perubahan ke `voiceover/lines_najmi_ep03.json`, `voices.json`, atau `generate_voiceover.py` → workflow jalan otomatis.
-2. Atau buka **Actions → Voiceover Najmi (VoiceStudio / OmniVoice) → Run workflow**. Isi `ids` kalau hanya mau generate sebagian, misalnya `n01 j01 d01`; kosongkan untuk semua.
-3. Setelah selesai, download artifact `suara-najmi-<sha>.zip`. Isinya `voices/` dan `dur.json`.
+1. Push perubahan ke file di `voiceover/` → workflow jalan otomatis.
+2. Atau **Actions → Voiceover Najmi (Edge TTS) → Run workflow**. Isi `ids` untuk generate sebagian, misalnya `n01 j01 d01`; kosongkan untuk semua.
+3. Download artifact `suara-najmi-<sha>.zip`. File utama: `voiceover_najmi_lengkap.mp3`.
 
-Output sudah 24 kHz mono dan `dur.json`-nya kompatibel dengan `import_voice.py`, jadi bisa langsung dipakai pipeline kit HD-2D.
+## Mengubah suara
 
-## Catatan operasional
+Buka `voices.json`:
+- `characters` — petakan tokoh ke profil mana.
+- `bank` — tiap profil punya `voice`, `rate` (mis. `-8%` lebih pelan, `+10%` lebih cepat), dan `pitch` (mis. `-9Hz` lebih rendah, `+9Hz` lebih tinggi).
+- `gap_ms` — jeda antar baris di MP3 gabungan (default `300`).
 
-- Run pertama mengunduh bobot ±2,4 GB dari HuggingFace. Cache `~/.cache/huggingface` disimpan antar run supaya run berikutnya jauh lebih cepat.
-- Inference di CPU sengaja memakai `float32` (bukan `float16` seperti CLI bawaan) agar stabil di runner gratis. `num_step: 16` dipakai untuk mempercepat; naikkan ke `32` di `voices.json` kalau mau kualitas lebih tinggi.
-- `speed` default `0.86` mengikuti catatan naskah (narasi lambat). Bisa diubah per karakter lewat `voices.json` atau per baris lewat field `speed` di `lines_najmi_ep03.json`.
-- Seed di tiap profil membuat suara lebih konsisten antar generate, meski voice design tetap punya variasi alami.
+Contoh: kalau Dimas kurang gugup, naikkan `rate` jadi `+18%` dan `pitch` `+14Hz`.
+
+## Catatan
+
+- Edge TTS adalah layanan online gratis dari Microsoft (bukan model lokal). Tidak ada data yang disimpan di luar runner GitHub.
+- `dur.json` menggantikan `t_est` di naskah untuk timing animasi.
+- Jeda antar baris bisa diubah lewat `gap_ms`; kalau mau tanpa jeda, set `0`.
 
 ## Lisensi & etika
 
-- Kode VoiceStudio: AGPL-3.0; kode OmniVoice: Apache-2.0.
-- Bobot OmniVoice: CC-BY-NC → **non-komercial**. Untuk kebutuhan komersial, ganti dengan engine berlisensi komersial di VoiceStudio (mis. VoxCPM2, Apache-2.0).
-- Jangan kloning suara orang tanpa izin.
+`edge-tts` adalah pustaka MIT; suara berasal dari layanan Microsoft Edge. Gunakan sesuai ketentuan layanan mereka, dan jangan meniru suara orang tertentu tanpa izin.
