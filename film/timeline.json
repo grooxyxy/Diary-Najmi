@@ -1,0 +1,769 @@
+{
+ "meta": {
+  "judul": "SEHARI JADI PEDAGANG DI JALUR REMPAH",
+  "durasi": "6–7 MENIT",
+  "narator": "NAJMI",
+  "format": "SINGLE NARRATOR"
+ },
+ "title": {
+  "a": 0,
+  "b": 5
+ },
+ "scenes": [
+  {
+   "id": "subuh",
+   "label": "SUBUH",
+   "sub": "Kepulauan Banda",
+   "a": 5,
+   "b": 46.95,
+   "vo0": 5
+  },
+  {
+   "id": "pagi",
+   "label": "PAGI",
+   "sub": "Pelabuhan mulai ramai",
+   "a": 46.95,
+   "b": 107.95,
+   "vo0": 47
+  },
+  {
+   "id": "jelangsiang",
+   "label": "MENJELANG SIANG",
+   "sub": "Mengenal rempah",
+   "a": 107.95,
+   "b": 159.95,
+   "vo0": 108
+  },
+  {
+   "id": "siang",
+   "label": "SIANG",
+   "sub": "Kesempatan yang hampir merugikan",
+   "a": 159.95,
+   "b": 229.95,
+   "vo0": 160
+  },
+  {
+   "id": "jelangsore",
+   "label": "SIANG MENJELANG SORE",
+   "sub": "Berburu fuli",
+   "a": 229.95,
+   "b": 268.95,
+   "vo0": 230
+  },
+  {
+   "id": "sore",
+   "label": "SORE",
+   "sub": "Langit mulai berubah",
+   "a": 268.95,
+   "b": 308.78,
+   "vo0": 269
+  },
+  {
+   "id": "malam",
+   "label": "MALAM",
+   "sub": "Memahami Jalur Rempah",
+   "a": 308.78,
+   "b": 393.232,
+   "vo0": 308.783
+  }
+ ],
+ "lines": [
+  {
+   "id": "subuh_01",
+   "scene": "subuh",
+   "text": "Bayangkan kamu bangun saat langit masih gelap.",
+   "t": 5,
+   "dur": 3,
+   "kind": "narr"
+  },
+  {
+   "id": "subuh_02",
+   "scene": "subuh",
+   "text": "Udara laut terasa lembap, suara tali kapal berderit, dan dari kejauhan terdengar orang-orang mulai memanggil satu sama lain.",
+   "t": 8,
+   "dur": 6.98,
+   "kind": "narr"
+  },
+  {
+   "id": "subuh_03",
+   "scene": "subuh",
+   "text": "Kamu bukan sedang berlibur.",
+   "t": 15,
+   "dur": 1.98,
+   "kind": "narr"
+  },
+  {
+   "id": "subuh_04",
+   "scene": "subuh",
+   "text": "Hari ini, kamu harus berdagang di salah satu tempat paling penting dalam jaringan rempah Nusantara, Kepulauan Banda.",
+   "t": 17,
+   "dur": 6.98,
+   "kind": "narr"
+  },
+  {
+   "id": "subuh_05",
+   "scene": "subuh",
+   "text": "Namaku Najmi.",
+   "t": 24,
+   "dur": 1.4,
+   "kind": "dlg",
+   "who": "Najmi"
+  },
+  {
+   "id": "subuh_06",
+   "scene": "subuh",
+   "text": "Aku datang dari pesisir utara Jawa bersama sebuah kapal dagang milik pamanku.",
+   "t": 25.4,
+   "dur": 4.58,
+   "kind": "narr"
+  },
+  {
+   "id": "subuh_07",
+   "scene": "subuh",
+   "text": "Di dalam kapal, kami membawa beras dan kain dagangan.",
+   "t": 30,
+   "dur": 2.98,
+   "kind": "narr"
+  },
+  {
+   "id": "subuh_08",
+   "scene": "subuh",
+   "text": "Tujuan kami sederhana, setidaknya menurutku. Menukar barang-barang itu dengan pala dan fuli, lalu pulang membawa keuntungan.",
+   "t": 33,
+   "dur": 7.98,
+   "kind": "narr"
+  },
+  {
+   "id": "subuh_09",
+   "scene": "subuh",
+   "text": "Tapi aku segera sadar, berdagang di Jalur Rempah tidak sesederhana membawa barang lalu menukarnya.",
+   "t": 41,
+   "dur": 5.98,
+   "kind": "narr"
+  },
+  {
+   "id": "pagi_01",
+   "scene": "pagi",
+   "text": "Pagi itu, pelabuhan mulai ramai.",
+   "t": 47,
+   "dur": 1.98,
+   "kind": "narr"
+  },
+  {
+   "id": "pagi_02",
+   "scene": "pagi",
+   "text": "Perahu-perahu kecil bergerak di antara kapal yang lebih besar.",
+   "t": 49,
+   "dur": 2.98,
+   "kind": "narr"
+  },
+  {
+   "id": "pagi_03",
+   "scene": "pagi",
+   "text": "Para awak mengangkat karung, menggulung tali, dan menurunkan barang dagangan.",
+   "t": 52,
+   "dur": 3.98,
+   "kind": "narr"
+  },
+  {
+   "id": "pagi_04",
+   "scene": "pagi",
+   "text": "Ada pedagang yang datang dari pulau lain, ada yang sudah berkali-kali singgah, dan ada juga orang sepertiku yang masih belajar mengenali wajah-wajah di pelabuhan.",
+   "t": 56,
+   "dur": 8.98,
+   "kind": "narr"
+  },
+  {
+   "id": "pagi_05",
+   "scene": "pagi",
+   "text": "Banda bukan tempat biasa.",
+   "t": 65,
+   "dur": 1.98,
+   "kind": "narr"
+  },
+  {
+   "id": "pagi_06",
+   "scene": "pagi",
+   "text": "Di pulau-pulau inilah pala dan fuli tumbuh.",
+   "t": 67,
+   "dur": 2.98,
+   "kind": "narr"
+  },
+  {
+   "id": "pagi_07",
+   "scene": "pagi",
+   "text": "Pala adalah biji yang tersembunyi di dalam buah, sedangkan fuli adalah selaput merah yang membungkus biji itu.",
+   "t": 70,
+   "dur": 5.98,
+   "kind": "narr"
+  },
+  {
+   "id": "pagi_08",
+   "scene": "pagi",
+   "text": "Keduanya bisa dikeringkan dan dibawa jauh melintasi laut.",
+   "t": 76,
+   "dur": 2.98,
+   "kind": "narr"
+  },
+  {
+   "id": "pagi_09",
+   "scene": "pagi",
+   "text": "Ukurannya kecil, tetapi nilainya besar.",
+   "t": 79,
+   "dur": 2.98,
+   "kind": "narr"
+  },
+  {
+   "id": "pagi_10",
+   "scene": "pagi",
+   "text": "Aku membantu menurunkan karung beras dari kapal.",
+   "t": 82,
+   "dur": 2.98,
+   "kind": "narr"
+  },
+  {
+   "id": "pagi_11",
+   "scene": "pagi",
+   "text": "Beras itu berasal dari Jawa, dibawa untuk diperdagangkan dengan hasil bumi Banda.",
+   "t": 85,
+   "dur": 3.98,
+   "kind": "narr"
+  },
+  {
+   "id": "pagi_12",
+   "scene": "pagi",
+   "text": "Kain-kain yang kami bawa juga punya peminat.",
+   "t": 89,
+   "dur": 2.98,
+   "kind": "narr"
+  },
+  {
+   "id": "pagi_13",
+   "scene": "pagi",
+   "text": "Di tempat seperti ini, barang dari satu pulau bisa menjadi kebutuhan bagi pulau lain.",
+   "t": 92,
+   "dur": 4.98,
+   "kind": "narr"
+  },
+  {
+   "id": "pagi_14",
+   "scene": "pagi",
+   "text": "Kapal tidak selalu berlayar hanya membawa rempah.",
+   "t": 97,
+   "dur": 2.98,
+   "kind": "narr"
+  },
+  {
+   "id": "pagi_15",
+   "scene": "pagi",
+   "text": "Mereka membawa beras, kain, keramik, logam, kabar, dan cerita dari tempat-tempat yang bahkan belum pernah kubayangkan.",
+   "t": 100,
+   "dur": 7.98,
+   "kind": "narr"
+  },
+  {
+   "id": "jelangsiang_01",
+   "scene": "jelangsiang",
+   "text": "Setelah barang kami diturunkan, pamanku memberiku tugas pertama, memeriksa kualitas pala yang akan kami beli.",
+   "t": 108,
+   "dur": 5.98,
+   "kind": "narr"
+  },
+  {
+   "id": "jelangsiang_02",
+   "scene": "jelangsiang",
+   "text": "Aku berjalan melewati lapak-lapak sederhana.",
+   "t": 114,
+   "dur": 1.98,
+   "kind": "narr"
+  },
+  {
+   "id": "jelangsiang_03",
+   "scene": "jelangsiang",
+   "text": "Di beberapa tempat, buah pala yang baru dipetik sedang dibuka.",
+   "t": 116,
+   "dur": 3.98,
+   "kind": "narr"
+  },
+  {
+   "id": "jelangsiang_04",
+   "scene": "jelangsiang",
+   "text": "Ada yang memisahkan kulit buah, biji, dan fuli.",
+   "t": 120,
+   "dur": 3.98,
+   "kind": "narr"
+  },
+  {
+   "id": "jelangsiang_05",
+   "scene": "jelangsiang",
+   "text": "Ada pula yang menjemur hasil panen agar kering sebelum disimpan.",
+   "t": 124,
+   "dur": 2.98,
+   "kind": "narr"
+  },
+  {
+   "id": "jelangsiang_06",
+   "scene": "jelangsiang",
+   "text": "Aroma khas pala terasa di udara, bercampur bau kayu kapal, garam, dan laut.",
+   "t": 127,
+   "dur": 5.98,
+   "kind": "narr"
+  },
+  {
+   "id": "jelangsiang_07",
+   "scene": "jelangsiang",
+   "text": "Awalnya, aku mengira semua pala terlihat sama.",
+   "t": 133,
+   "dur": 2.98,
+   "kind": "narr"
+  },
+  {
+   "id": "jelangsiang_08",
+   "scene": "jelangsiang",
+   "text": "Ternyata tidak!",
+   "t": 136,
+   "dur": 0.98,
+   "kind": "narr"
+  },
+  {
+   "id": "jelangsiang_09",
+   "scene": "jelangsiang",
+   "text": "Ada yang kering dengan baik, ada yang masih terasa lembab, ada yang ukurannya lebih besar, dan ada yang kulit bijinya terlihat rusak.",
+   "t": 137,
+   "dur": 7.98,
+   "kind": "narr"
+  },
+  {
+   "id": "jelangsiang_10",
+   "scene": "jelangsiang",
+   "text": "Pamanku mengajariku bahwa barang bagus bukan hanya soal tampilan.",
+   "t": 145,
+   "dur": 3.98,
+   "kind": "narr"
+  },
+  {
+   "id": "jelangsiang_11",
+   "scene": "jelangsiang",
+   "text": "Perjalanan laut bisa memakan waktu lama.",
+   "t": 149,
+   "dur": 2.98,
+   "kind": "narr"
+  },
+  {
+   "id": "jelangsiang_12",
+   "scene": "jelangsiang",
+   "text": "Rempah yang belum cukup kering dapat rusak di tengah perjalanan.",
+   "t": 152,
+   "dur": 2.98,
+   "kind": "narr"
+  },
+  {
+   "id": "jelangsiang_13",
+   "scene": "jelangsiang",
+   "text": "Satu karung yang salah pilih bisa mengurangi keuntungan seluruh pelayaran.",
+   "t": 155,
+   "dur": 4.98,
+   "kind": "narr"
+  },
+  {
+   "id": "siang_01",
+   "scene": "siang",
+   "text": "Menjelang siang, aku mulai berani ikut menawar.",
+   "t": 160,
+   "dur": 2.98,
+   "kind": "narr"
+  },
+  {
+   "id": "siang_02",
+   "scene": "siang",
+   "text": "Seorang pedagang menawarkan pala dengan harga yang tampak sangat menguntungkan.",
+   "t": 163,
+   "dur": 3.98,
+   "kind": "narr"
+  },
+  {
+   "id": "siang_03",
+   "scene": "siang",
+   "text": "Jumlahnya banyak, dan kalau berhasil kubeli murah, kami bisa pulang dengan laba besar.",
+   "t": 167,
+   "dur": 4.98,
+   "kind": "narr"
+  },
+  {
+   "id": "siang_04",
+   "scene": "siang",
+   "text": "Namun, ketika aku memeriksa karung bagian bawah, aku menemukan beberapa biji yang masih lembab.",
+   "t": 172,
+   "dur": 5.98,
+   "kind": "narr"
+  },
+  {
+   "id": "siang_05",
+   "scene": "siang",
+   "text": "Ada juga yang aromanya tidak sekuat sampel di atas.",
+   "t": 178,
+   "dur": 2.98,
+   "kind": "narr"
+  },
+  {
+   "id": "siang_06",
+   "scene": "siang",
+   "text": "Aku hampir saja mengabaikannya.",
+   "t": 181,
+   "dur": 2.98,
+   "kind": "narr"
+  },
+  {
+   "id": "siang_07",
+   "scene": "siang",
+   "text": "Bagiku, kesempatan mendapatkan barang murah terasa terlalu bagus untuk dilewatkan.",
+   "t": 184,
+   "dur": 4.98,
+   "kind": "narr"
+  },
+  {
+   "id": "siang_08",
+   "scene": "siang",
+   "text": "Tapi, aku teringat pesan pamanku.",
+   "t": 189,
+   "dur": 1.98,
+   "kind": "narr"
+  },
+  {
+   "id": "siang_08b",
+   "scene": "siang",
+   "text": "Jangan hanya melihat harga ketika membeli barang yang harus menempuh lautan.",
+   "t": 191,
+   "dur": 3.98,
+   "kind": "dlg",
+   "who": "Paman"
+  },
+  {
+   "id": "siang_09",
+   "scene": "siang",
+   "text": "Aku meminta agar karung-karung itu dibuka dan diperiksa ulang.",
+   "t": 195,
+   "dur": 3.98,
+   "kind": "narr"
+  },
+  {
+   "id": "siang_10",
+   "scene": "siang",
+   "text": "Ternyata, sebagian isinya memang belum cukup kering.",
+   "t": 199,
+   "dur": 2.98,
+   "kind": "narr"
+  },
+  {
+   "id": "siang_11",
+   "scene": "siang",
+   "text": "Pedagang itu tidak marah.",
+   "t": 202,
+   "dur": 1.98,
+   "kind": "narr"
+  },
+  {
+   "id": "siang_12",
+   "scene": "siang",
+   "text": "Ia menjelaskan bahwa cuaca beberapa hari terakhir membuat proses penjemuran lebih sulit.",
+   "t": 204,
+   "dur": 4.98,
+   "kind": "narr"
+  },
+  {
+   "id": "siang_13",
+   "scene": "siang",
+   "text": "Kami akhirnya mengurangi jumlah pembelian dan menyepakati harga yang lebih sesuai untuk bagian yang kualitasnya baik.",
+   "t": 209,
+   "dur": 5.98,
+   "kind": "narr"
+  },
+  {
+   "id": "siang_14",
+   "scene": "siang",
+   "text": "Itu pertama kalinya aku menyadari bahwa tawar-menawar bukan sekadar mencari harga serendah mungkin.",
+   "t": 215,
+   "dur": 5.98,
+   "kind": "narr"
+  },
+  {
+   "id": "siang_15",
+   "scene": "siang",
+   "text": "Kedua pihak harus memahami kualitas barang, risiko perjalanan, dan kepercayaan yang akan dibawa sampai transaksi berikutnya.",
+   "t": 221,
+   "dur": 8.98,
+   "kind": "narr"
+  },
+  {
+   "id": "jelangsore_01",
+   "scene": "jelangsore",
+   "text": "Sesudah urusan pala selesai, kami mencari fuli.",
+   "t": 230,
+   "dur": 2.98,
+   "kind": "narr"
+  },
+  {
+   "id": "jelangsore_02",
+   "scene": "jelangsore",
+   "text": "Warnanya merah jingga, bentuknya seperti jaring tipis yang melingkari biji pala.",
+   "t": 233,
+   "dur": 4.98,
+   "kind": "narr"
+  },
+  {
+   "id": "jelangsore_03",
+   "scene": "jelangsore",
+   "text": "Ketika sudah dikeringkan, fuli menjadi lebih kaku dan ringan.",
+   "t": 238,
+   "dur": 2.98,
+   "kind": "narr"
+  },
+  {
+   "id": "jelangsore_04",
+   "scene": "jelangsore",
+   "text": "Aku takjub melihat bagaimana satu buah bisa menghasilkan dua komoditas yang berbeda.",
+   "t": 241,
+   "dur": 5.98,
+   "kind": "narr"
+  },
+  {
+   "id": "jelangsore_05",
+   "scene": "jelangsore",
+   "text": "Di tengah kesibukan pasar, aku juga mulai memperhatikan orang-orang di sekelilingku.",
+   "t": 247,
+   "dur": 3.98,
+   "kind": "narr"
+  },
+  {
+   "id": "jelangsore_06",
+   "scene": "jelangsore",
+   "text": "Ada pedagang yang menggunakan bahasa berbeda, awak kapal yang saling membantu mengangkat muatan, dan pembeli yang datang membawa barang dari tempat jauh.",
+   "t": 251,
+   "dur": 8.98,
+   "kind": "narr"
+  },
+  {
+   "id": "jelangsore_07",
+   "scene": "jelangsore",
+   "text": "Tak semua orang mengenal satu sama lain, tetapi mereka memahami satu hal. Perdagangan hanya berjalan kalau orang mau saling percaya.",
+   "t": 260,
+   "dur": 8.98,
+   "kind": "narr"
+  },
+  {
+   "id": "sore_01",
+   "scene": "sore",
+   "text": "Siang bergeser menjadi sore.",
+   "t": 269,
+   "dur": 1.98,
+   "kind": "narr"
+  },
+  {
+   "id": "sore_02",
+   "scene": "sore",
+   "text": "Awan gelap berkumpul di atas laut.",
+   "t": 271,
+   "dur": 2.98,
+   "kind": "narr"
+  },
+  {
+   "id": "sore_03",
+   "scene": "sore",
+   "text": "Angin berubah, dan para awak mulai mempercepat pekerjaan.",
+   "t": 274,
+   "dur": 3.98,
+   "kind": "narr"
+  },
+  {
+   "id": "sore_04",
+   "scene": "sore",
+   "text": "Karung-karung pala dan fuli harus dibungkus rapat. Dijauhkan dari air, lalu disusun di bagian kapal yang aman.",
+   "t": 278,
+   "dur": 5.98,
+   "kind": "narr"
+  },
+  {
+   "id": "sore_05",
+   "scene": "sore",
+   "text": "Barang dagangan bukan sekadar muatan.",
+   "t": 284,
+   "dur": 2.763,
+   "kind": "narr"
+  },
+  {
+   "id": "sore_06",
+   "scene": "sore",
+   "text": "Di dalam setiap karung ada hasil kerja banyak orang. Mereka yang menanam, merawat, memanen, mengeringkan, mengangkut, dan menjualnya.",
+   "t": 286.783,
+   "dur": 8.98,
+   "kind": "narr"
+  },
+  {
+   "id": "sore_07",
+   "scene": "sore",
+   "text": "Sebelum hari berakhir, aku menghitung kembali barang yang kami dapatkan.",
+   "t": 295.783,
+   "dur": 3.98,
+   "kind": "narr"
+  },
+  {
+   "id": "sore_08",
+   "scene": "sore",
+   "text": "Tidak sebanyak yang kuharapkan saat pagi.",
+   "t": 299.783,
+   "dur": 2.98,
+   "kind": "narr"
+  },
+  {
+   "id": "sore_09",
+   "scene": "sore",
+   "text": "Tetapi kualitasnya lebih terjaga, dan kami tidak menghabiskan bekal untuk membeli barang yang berisiko rusak.",
+   "t": 302.783,
+   "dur": 5.98,
+   "kind": "narr"
+  },
+  {
+   "id": "malam_01",
+   "scene": "malam",
+   "text": "Saat matahari mulai tenggelam, pelabuhan perlahan berubah warna.",
+   "t": 308.783,
+   "dur": 3.98,
+   "kind": "narr"
+  },
+  {
+   "id": "malam_02",
+   "scene": "malam",
+   "text": "Kapal-kapal bergoyang pelan, sementara orang-orang membereskan sisa pekerjaan.",
+   "t": 312.783,
+   "dur": 4.98,
+   "kind": "narr"
+  },
+  {
+   "id": "malam_03",
+   "scene": "malam",
+   "text": "Aku duduk di dekat tumpukan karung, memandangi laut yang sejak pagi terasa seperti jalan raya tanpa ujung.",
+   "t": 317.783,
+   "dur": 5.98,
+   "kind": "narr"
+  },
+  {
+   "id": "malam_04",
+   "scene": "malam",
+   "text": "Baru hari itu aku mengerti mengapa tempat ini begitu penting.",
+   "t": 323.783,
+   "dur": 3.98,
+   "kind": "narr"
+  },
+  {
+   "id": "malam_05",
+   "scene": "malam",
+   "text": "Jalur rempah bukan sekadar jalur untuk mengirim pala dan cengkih.",
+   "t": 327.783,
+   "dur": 2.98,
+   "kind": "narr"
+  },
+  {
+   "id": "malam_06",
+   "scene": "malam",
+   "text": "Ia adalah jaringan besar yang menghubungkan pulau-pulau, pelabuhan, dan masyarakat.",
+   "t": 330.783,
+   "dur": 4.98,
+   "kind": "narr"
+  },
+  {
+   "id": "malam_07",
+   "scene": "malam",
+   "text": "Dari Banda, pala dan fuli bisa bergerak ke berbagai pelabuhan Nusantara, lalu diteruskan ke pasar-pasar yang jauh.",
+   "t": 335.783,
+   "dur": 6.98,
+   "kind": "narr"
+  },
+  {
+   "id": "malam_08",
+   "scene": "malam",
+   "text": "Sebaliknya, barang, kabar, kebiasaan, dan pengetahuan dari tempat lain ikut tiba di sini.",
+   "t": 342.783,
+   "dur": 5.98,
+   "kind": "narr"
+  },
+  {
+   "id": "malam_09",
+   "scene": "malam",
+   "text": "Dulu aku mengira seorang pedagang hanya perlu membeli murah dan menjual mahal.",
+   "t": 348.783,
+   "dur": 4.98,
+   "kind": "narr"
+  },
+  {
+   "id": "malam_10",
+   "scene": "malam",
+   "text": "Sekarang aku tahu, seorang pedagang juga harus membaca cuaca, memahami mutu barang, menghitung risiko, mengenali orang, dan menjaga kepercayaan.",
+   "t": 353.783,
+   "dur": 8.98,
+   "kind": "narr"
+  },
+  {
+   "id": "malam_11",
+   "scene": "malam",
+   "text": "Malam itu, aku tidur dengan bau pala masih menempel di bajuku.",
+   "t": 362.783,
+   "dur": 3.98,
+   "kind": "narr"
+  },
+  {
+   "id": "malam_12",
+   "scene": "malam",
+   "text": "Besok, kapal kami mungkin akan berlayar lagi menuju pelabuhan berikutnya.",
+   "t": 366.783,
+   "dur": 3.98,
+   "kind": "narr"
+  },
+  {
+   "id": "malam_13",
+   "scene": "malam",
+   "text": "Aku belum tahu apa yang menunggu di sana, tapi satu hal sudah pasti.",
+   "t": 370.783,
+   "dur": 4.98,
+   "kind": "narr"
+  },
+  {
+   "id": "malam_14",
+   "scene": "malam",
+   "text": "Hari ini aku tidak hanya belajar berdagang.",
+   "t": 375.783,
+   "dur": 1.98,
+   "kind": "narr"
+  },
+  {
+   "id": "malam_15",
+   "scene": "malam",
+   "text": "Aku belajar bahwa rempah sekecil biji pala bisa menghubungkan dunia yang begitu luas.",
+   "t": 377.783,
+   "dur": 5.98,
+   "kind": "narr"
+  },
+  {
+   "id": "malam_16",
+   "scene": "malam",
+   "text": "Dan di antara ombak, layar, serta karung-karung dagangan itu, aku baru saja menjadi bagian kecil dari perjalanan besar bernama Jalur Rempah.",
+   "t": 383.783,
+   "dur": 8.98,
+   "kind": "narr"
+  },
+  {
+   "id": "malam_17",
+   "scene": "malam",
+   "text": "Terima kasih.",
+   "t": 392.783,
+   "dur": 0.449,
+   "kind": "narr"
+  }
+ ],
+ "outro": {
+  "a": 393.932,
+  "b": 401.932
+ },
+ "dur": 401.932,
+ "source": "voiceover/ep01/1.mp3 + voiceover/ep01/2.mp3",
+ "estimated": false
+}

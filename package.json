@@ -1,0 +1,19 @@
+{
+  "name": "sehari-pedagang-jalur-rempah",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Animasi pixel-art 2.5D: Sehari Jadi Pedagang di Jalur Rempah",
+  "scripts": {
+    "still": "node tools/still.mjs",
+    "render": "node tools/render.mjs"
+  },
+  "engines": { "node": ">=20" },
+  "dependencies": {
+    "three": "0.170.0",
+    "playwright-core": "1.63.0",
+    "@fontsource/cinzel": "5.2.5",
+    "@fontsource/cormorant-garamond": "5.2.5",
+    "@fontsource/im-fell-english": "5.2.5"
+  }
+}

@@ -1,0 +1,8 @@
+Sehari Jadi Pedagang di Jalur Rempah
+- Mesin gaya HD-2D / 2.5D pixel art (vendor/*, sebagian tools): Lemo-Opuscar, © LemoLab, MIT License (https://github.com/lemomo-ai/lemo-opuscar).
+- three.js (MIT), Playwright (Apache-2.0).
+- Font via @fontsource: Cinzel, Cormorant Garamond, IM Fell English — SIL Open Font License 1.1.
+- Suara narasi: rekaman pengguna (voiceover/ep01/1.mp3 dan 2.mp3).
+- Naskah: milik pembuat naskah (script/naskah.txt).
+Karakter, dunia, sprite, musik, dan ambience dibuat prosedural oleh kode di repo ini.
+Tidak ada kredit/watermark LemoLab yang ditampilkan di dalam film.

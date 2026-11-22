@@ -1,0 +1,145 @@
+name: Render film (HD-2D)
+
+on:
+  workflow_dispatch:
+    inputs:
+      preview:
+        description: 'Pratinjau cepat (480p, 12 fps, 4 job) — untuk cek gerak/caption sebelum render penuh'
+        type: boolean
+        default: false
+      size:
+        description: 'Resolusi (abaikan bila pratinjau)'
+        type: choice
+        options: ['1280x720', '1920x1080']
+        default: '1280x720'
+      fps:
+        description: 'Frame per detik (abaikan bila pratinjau)'
+        type: choice
+        options: ['30', '24']
+        default: '30'
+      jobs:
+        description: 'Jumlah job paralel (maks. 20; abaikan bila pratinjau)'
+        type: string
+        default: '8'
+      ss:
+        description: 'Supersampling anti-alias (1 = cepat, 2 = halus tapi ±3x lebih lama)'
+        type: choice
+        options: ['1', '2']
+        default: '1'
+
+env:
+  FORCE_COLOR: '0'
+
+jobs:
+  prep:
+    name: Timeline, audio, subtitle
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    outputs:
+      matrix: ${{ steps.cfg.outputs.matrix }}
+      w: ${{ steps.cfg.outputs.w }}
+      h: ${{ steps.cfg.outputs.h }}
+      fps: ${{ steps.cfg.outputs.fps }}
+      ss: ${{ steps.cfg.outputs.ss }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 20 }
+      - uses: actions/setup-python@v5
+        with: { python-version: '3.12' }
+
+      - name: Konfigurasi
+        id: cfg
+        shell: bash
+        run: |
+          if [ "${{ inputs.preview }}" = "true" ]; then W=854; H=480; FPS=12; SS=1; J=4
+          else S="${{ inputs.size }}"; W=${S%x*}; H=${S#*x}; FPS=${{ inputs.fps }}; SS=${{ inputs.ss }}; J=${{ inputs.jobs }}; fi
+          [ "$J" -gt 20 ] && J=20; [ "$J" -lt 1 ] && J=1
+          M=$(python3 -c "import json;print(json.dumps({'seg':list(range($J))}))")
+          { echo "matrix=$M"; echo "w=$W"; echo "h=$H"; echo "fps=$FPS"; echo "ss=$SS"; } >> "$GITHUB_OUTPUT"
+
+      - name: Pasang dependensi
+        run: |
+          npm ci --no-audit --no-fund
+          pip install numpy scipy
+          ffmpeg -version | head -1
+
+      - name: Narasi pengguna (dua rekaman → satu WAV)
+        run: |
+          mkdir -p audio
+          ffmpeg -y -loglevel error \
+            -i voiceover/ep01/1.mp3 -i voiceover/ep01/2.mp3 \
+            -filter_complex "[0:a][1:a]concat=n=2:v=0:a=1[out]" \
+            -map "[out]" -ac 1 -ar 44100 -c:a pcm_s16le audio/vo.wav
+          ffprobe -v error -show_entries format=duration -of default=nw=1 audio/vo.wav
+
+      - name: Timeline, audio, subtitle
+        run: |
+          node tools/build_timeline.mjs
+          python3 tools/audio.py
+          python3 tools/srt.py
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: prep
+          path: |
+            film/timeline.json
+            film/timing.json
+            audio/mix.wav
+            audio/voice.wav
+            out/subtitles_id.srt
+          retention-days: 7
+
+  render:
+    name: Render potongan ${{ matrix.seg }}
+    needs: prep
+    runs-on: ubuntu-24.04
+    timeout-minutes: 180
+    strategy:
+      fail-fast: false
+      matrix: ${{ fromJSON(needs.prep.outputs.matrix) }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 20 }
+      - uses: actions/download-artifact@v4
+        with: { name: prep, path: . }
+      - run: npm ci --no-audit --no-fund
+      - name: Pasang Chromium
+        run: npx playwright-core install --with-deps chromium
+      - name: Render
+        run: |
+          N=$(echo '${{ needs.prep.outputs.matrix }}' | python3 -c "import sys,json;print(len(json.load(sys.stdin)['seg']))")
+          node tools/render.mjs --seg ${{ matrix.seg }}/$N --fps ${{ needs.prep.outputs.fps }} --w ${{ needs.prep.outputs.w }} --h ${{ needs.prep.outputs.h }} --ss ${{ needs.prep.outputs.ss }} --out out/seg_$(printf %03d ${{ matrix.seg }}).mp4
+      - uses: actions/upload-artifact@v4
+        with:
+          name: seg-${{ matrix.seg }}
+          path: out/seg_*.mp4
+          retention-days: 3
+
+  final:
+    name: Gabung video + audio
+    needs: [prep, render]
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with: { name: prep, path: . }
+      - uses: actions/download-artifact@v4
+        with: { pattern: 'seg-*', path: out, merge-multiple: true }
+      - name: Mux + poster
+        run: |
+          ls -la out
+          SHORTEST=1 bash tools/mux.sh out/sehari-jadi-pedagang.mp4
+          ffmpeg -y -loglevel error -ss 00:02:00 -i out/sehari-jadi-pedagang.mp4 -frames:v 1 -q:v 2 out/poster.jpg
+          ls -lh out/sehari-jadi-pedagang.mp4 out/subtitles_id.srt out/poster.jpg
+      - uses: actions/upload-artifact@v4
+        with:
+          name: film-jadi
+          path: |
+            out/sehari-jadi-pedagang.mp4
+            out/subtitles_id.srt
+            out/poster.jpg
+            audio/voice.wav
+          retention-days: 30

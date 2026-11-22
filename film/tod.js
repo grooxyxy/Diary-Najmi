@@ -1,0 +1,38 @@
+// Jadwal cahaya sepanjang hari: setiap adegan punya keadaan awal & akhir (langit, matahari/bulan, kabut, laut, awan, angin, lentera).
+// Cahaya adalah subjeknya: dua suhu (ambien besar vs. lentera hangat), satu warna kabut per waktu.
+import * as THREE from 'three';
+
+const C = h => new THREE.Color(h);
+// sun: arah (dari tanah ke sumber cahaya); sunI: intensitas; disc: kilau matahari/bulan di langit
+export const STATE = {
+  subuh0:  { top: '#070d26', mid: '#1a2a58', hor: '#5a5878', sun: [60, 4, -40], sunC: '#7088c8', sunI: .9, disc: '#aab8ff', discI: .0, hemiS: '#3c4c86', hemiG: '#14121c', hemiI: 1.5, fog: '#2a3558', fogD: .0095, exp: 1.2, deep: '#060e22', shal: '#14305a', crest: '#3a5a86', stars: .9, lamp: 1, cloud: '#6a7090', cloudK: .35, cover: .25, wind: .35, rain: 0, warm: 0, sat: 1.05, amt: .62, bloom: .6 },
+  subuh1:  { top: '#2a3c80', mid: '#8a6e92', hor: '#ffae66', sun: [90, 8, -50], sunC: '#ffa868', sunI: 2.4, disc: '#ffb070', discI: 1.4, hemiS: '#8c80a8', hemiG: '#2a2024', hemiI: 1.7, fog: '#a07088', fogD: .0085, exp: 1.2, deep: '#0c1a34', shal: '#2a4a70', crest: '#e0a078', stars: .08, lamp: .75, cloud: '#e0a090', cloudK: .7, cover: .35, wind: .4, rain: 0, warm: .15, sat: 1.1, amt: .58, bloom: .7 },
+  pagi0:   { top: '#3e70c0', mid: '#8cb4d8', hor: '#ffd49a', sun: [80, 16, -34], sunC: '#ffcf90', sunI: 4.2, disc: '#ffd8a0', discI: 1.2, hemiS: '#9ab8e0', hemiG: '#5a4a38', hemiI: 2.6, fog: '#e0c4a0', fogD: .0058, exp: 1.1, deep: '#0e3050', shal: '#2c78a0', crest: '#ffe8c0', stars: 0, lamp: .1, cloud: '#fff0dc', cloudK: 1, cover: .4, wind: .5, rain: 0, warm: .12, sat: 1.12, amt: .5, bloom: .55 },
+  pagi1:   { top: '#3a76cc', mid: '#86b8e0', hor: '#ffe6bc', sun: [60, 32, -20], sunC: '#ffe0b0', sunI: 4.8, disc: '#ffe8c0', discI: 1, hemiS: '#a4c4e8', hemiG: '#5a4c3a', hemiI: 2.8, fog: '#d8d0bc', fogD: .0052, exp: 1.08, deep: '#0e3858', shal: '#2c86a8', crest: '#fff0d0', stars: 0, lamp: 0, cloud: '#ffffff', cloudK: 1, cover: .45, wind: .6, rain: 0, warm: .08, sat: 1.12, amt: .48, bloom: .5 },
+  js0:     { top: '#2e70d0', mid: '#7ab4e4', hor: '#d0e8f0', sun: [30, 46, 10], sunC: '#fff0d0', sunI: 5.2, disc: '#ffffff', discI: .8, hemiS: '#a8ccf0', hemiG: '#6a5a44', hemiI: 3, fog: '#c4d8dc', fogD: .0046, exp: 1.06, deep: '#0c3c5e', shal: '#2e90aa', crest: '#ffffff', stars: 0, lamp: 0, cloud: '#ffffff', cloudK: 1, cover: .5, wind: .6, rain: 0, warm: .04, sat: 1.14, amt: .45, bloom: .45 },
+  js1:     { top: '#2a6cd0', mid: '#74b0e4', hor: '#cfe6ee', sun: [10, 60, 20], sunC: '#fff4dc', sunI: 5.6, disc: '#ffffff', discI: .7, hemiS: '#acd0f4', hemiG: '#6c5c46', hemiI: 3.1, fog: '#c0d8de', fogD: .0044, exp: 1.05, deep: '#0c405e', shal: '#2c98ae', crest: '#ffffff', stars: 0, lamp: 0, cloud: '#ffffff', cloudK: 1, cover: .5, wind: .6, rain: 0, warm: .03, sat: 1.15, amt: .44, bloom: .45 },
+  siang0:  { top: '#2468d0', mid: '#6cacea', hor: '#c8e6f0', sun: [0, 70, 24], sunC: '#fff6e0', sunI: 6, disc: '#ffffff', discI: .6, hemiS: '#b0d4f8', hemiG: '#6e5e48', hemiI: 3.2, fog: '#bcd8e0', fogD: .0042, exp: 1.04, deep: '#0a4260', shal: '#2ca0b0', crest: '#ffffff', stars: 0, lamp: 0, cloud: '#ffffff', cloudK: 1, cover: .55, wind: .6, rain: 0, warm: .02, sat: 1.16, amt: .42, bloom: .45 },
+  siang1:  { top: '#2468d0', mid: '#6cacea', hor: '#c8e6f0', sun: [-12, 66, 22], sunC: '#fff2d6', sunI: 5.8, disc: '#ffffff', discI: .6, hemiS: '#b0d4f8', hemiG: '#6e5e48', hemiI: 3.2, fog: '#bcd8e0', fogD: .0042, exp: 1.04, deep: '#0a4260', shal: '#2ca0b0', crest: '#ffffff', stars: 0, lamp: 0, cloud: '#ffffff', cloudK: 1, cover: .55, wind: .65, rain: 0, warm: .04, sat: 1.16, amt: .42, bloom: .45 },
+  jr0:     { top: '#2e66c0', mid: '#7ab0dc', hor: '#f4dcb0', sun: [-44, 36, 22], sunC: '#ffd8a0', sunI: 5, disc: '#ffe4b0', discI: .9, hemiS: '#a0c0e8', hemiG: '#6a5440', hemiI: 2.8, fog: '#dcc8a8', fogD: .0052, exp: 1.08, deep: '#0c3a5a', shal: '#2a8aa4', crest: '#ffe8c0', stars: 0, lamp: 0, cloud: '#ffe8cc', cloudK: 1, cover: .55, wind: .7, rain: 0, warm: .12, sat: 1.14, amt: .5, bloom: .55 },
+  jr1:     { top: '#3a5c9c', mid: '#8aa4c4', hor: '#f0c898', sun: [-56, 26, 22], sunC: '#ffc888', sunI: 4.2, disc: '#ffd0a0', discI: 1, hemiS: '#94a8d0', hemiG: '#5e4a3c', hemiI: 2.5, fog: '#d4b898', fogD: .006, exp: 1.1, deep: '#0c3050', shal: '#2a7090', crest: '#ffd8a8', stars: 0, lamp: 0, cloud: '#f0c8a8', cloudK: .9, cover: .65, wind: .9, rain: 0, warm: .16, sat: 1.12, amt: .54, bloom: .6 },
+  sore0:   { top: '#3a4468', mid: '#686e8e', hor: '#c8a088', sun: [-60, 20, 20], sunC: '#f0b078', sunI: 2.6, disc: '#f0b890', discI: .6, hemiS: '#6c7498', hemiG: '#44363a', hemiI: 2.0, fog: '#7a7690', fogD: .0085, exp: 1.12, deep: '#0a1c34', shal: '#1e4660', crest: '#b8b4c4', stars: 0, lamp: .15, cloud: '#6a6e86', cloudK: .6, cover: .85, wind: 1.3, rain: 0, warm: .1, sat: 1.0, amt: .64, bloom: .6 },
+  sore1:   { top: '#242a48', mid: '#42465e', hor: '#7a6a72', sun: [-60, 12, 20], sunC: '#c89078', sunI: 1.3, disc: '#d0a090', discI: .2, hemiS: '#505878', hemiG: '#30262c', hemiI: 1.8, fog: '#4c4a66', fogD: .0125, exp: 1.18, deep: '#08142a', shal: '#18364e', crest: '#8890a8', stars: 0, lamp: .4, cloud: '#464a62', cloudK: .45, cover: 1, wind: 1.65, rain: .6, warm: .04, sat: .95, amt: .7, bloom: .65 },
+  malam0:  { top: '#26285a', mid: '#8a4a6c', hor: '#ff9658', sun: [-80, 5, 6], sunC: '#ff8a48', sunI: 2.4, disc: '#ff9a58', discI: 1.5, hemiS: '#6a5890', hemiG: '#2a1e28', hemiI: 1.7, fog: '#74506a', fogD: .0095, exp: 1.18, deep: '#0c1430', shal: '#2a3a68', crest: '#ff9a68', stars: .1, lamp: .6, cloud: '#e08a70', cloudK: .8, cover: .55, wind: .7, rain: 0, warm: .15, sat: 1.1, amt: .6, bloom: .75 },
+  malam1:  { top: '#0a1030', mid: '#202858', hor: '#6a5680', sun: [-44, 40, -50], sunC: '#8aa4e8', sunI: 1.5, disc: '#d8e4ff', discI: 1, hemiS: '#3a4c88', hemiG: '#14121c', hemiI: 1.7, fog: '#1c2a4c', fogD: .0095, exp: 1.2, deep: '#060e22', shal: '#14305a', crest: '#4a6a9a', stars: .85, lamp: 1, cloud: '#46507a', cloudK: .3, cover: .3, wind: .35, rain: 0, warm: .03, sat: 1.05, amt: .64, bloom: .65 },
+  malam2:  { top: '#070b22', mid: '#161e48', hor: '#3a3c64', sun: [-30, 46, -50], sunC: '#7890d8', sunI: 1.3, disc: '#d8e4ff', discI: 1, hemiS: '#34447c', hemiG: '#12101a', hemiI: 1.6, fog: '#162240', fogD: .0095, exp: 1.2, deep: '#050c1e', shal: '#102852', crest: '#4a6a9a', stars: 1, lamp: 1, cloud: '#36406a', cloudK: .25, cover: .2, wind: .3, rain: 0, warm: .02, sat: 1.05, amt: .66, bloom: .65 },
+};
+export const SCENE_TOD = {
+  subuh: ['subuh0', 'subuh1'], pagi: ['pagi0', 'pagi1'], jelangsiang: ['js0', 'js1'], siang: ['siang0', 'siang1'], jelangsore: ['jr0', 'jr1'], sore: ['sore0', 'sore1'], malam: ['malam0', 'malam1', 'malam2'],
+};
+const COLS = ['top', 'mid', 'hor', 'sunC', 'disc', 'hemiS', 'hemiG', 'fog', 'deep', 'shal', 'crest', 'cloud'];
+const NUMS = ['sunI', 'discI', 'hemiI', 'fogD', 'exp', 'stars', 'lamp', 'cloudK', 'cover', 'wind', 'rain', 'warm', 'sat', 'amt', 'bloom'];
+const _c = {}; for (const k in STATE) { _c[k] = {}; for (const f of COLS) _c[k][f] = C(STATE[k][f]); }
+const tmp = new THREE.Color();
+// u 0..1 dalam adegan; malam punya tiga kunci (senja → malam → larut)
+export function sample(sceneId, u) {
+  const keys = SCENE_TOD[sceneId] || SCENE_TOD.siang, n = keys.length - 1, x = Math.min(.9999, Math.max(0, u)) * n, i = Math.floor(x), f = x - i, a = keys[i], b = keys[i + 1], s = f * f * (3 - 2 * f);
+  const o = { sun: STATE[a].sun.map((v, j) => v + (STATE[b].sun[j] - v) * s) };
+  for (const c of COLS) o[c] = new THREE.Color().copy(_c[a][c]).lerp(_c[b][c], s);
+  for (const k of NUMS) o[k] = STATE[a][k] + (STATE[b][k] - STATE[a][k]) * s;
+  return o;
+}

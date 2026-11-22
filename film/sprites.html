@@ -1,0 +1,10 @@
+<!doctype html><meta charset="utf-8"><script type="importmap">{"imports":{"three":"/node_modules/three/build/three.module.js","three/addons/":"/node_modules/three/examples/jsm/"}}</script><body style="margin:0;background:#2a3a4a"><canvas id=c></canvas>
+<script type="module">
+import { atlasCanvas, LOOKS, FW, FH } from './people.js';
+const keys = (new URLSearchParams(location.search).get('k') || Object.keys(LOOKS).join(',')).split(','), cols = +(new URLSearchParams(location.search).get('cols') || 16), S = 3;
+const c = document.getElementById('c'), g = c.getContext('2d'); g.imageSmoothingEnabled = false;
+const first = atlasCanvas(keys[0]), n = first.width / FW, rows = Math.ceil(n / cols);
+c.width = cols * FW * S; c.height = keys.length * rows * FH * S;
+keys.forEach((k, ki) => { const a = atlasCanvas(k); for (let i = 0; i < n; i++) { const cx = (i % cols) * FW * S, cy = (ki * rows + Math.floor(i / cols)) * FH * S; g.drawImage(a, i * FW, 0, FW, FH, cx, cy, FW * S, FH * S); } });
+window.READY = true;
+</script>

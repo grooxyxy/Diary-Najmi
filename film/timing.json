@@ -1,0 +1,755 @@
+{
+  "totalDur": 388.2318,
+  "filmDur": 396.6,
+  "fps": 30,
+  "chapters": [
+    {
+      "id": "ch1",
+      "name": "Subuh di Banda",
+      "a": 0,
+      "b": 41.95
+    },
+    {
+      "id": "ch2",
+      "name": "Pelabuhan Ramai",
+      "a": 41.95,
+      "b": 102.95
+    },
+    {
+      "id": "ch3",
+      "name": "Mengenal Rempah",
+      "a": 102.95,
+      "b": 154.95
+    },
+    {
+      "id": "ch4",
+      "name": "Tawar-Menawar",
+      "a": 154.95,
+      "b": 224.95
+    },
+    {
+      "id": "ch5",
+      "name": "Berburu Fuli",
+      "a": 224.95,
+      "b": 263.95
+    },
+    {
+      "id": "ch6",
+      "name": "Langit Berubah",
+      "a": 263.95,
+      "b": 303.78
+    },
+    {
+      "id": "ch7",
+      "name": "Jalur Rempah",
+      "a": 303.78,
+      "b": 388.2318
+    }
+  ],
+  "lines": [
+    {
+      "text": "Bayangkan kamu bangun saat langit masih gelap, udara laut terasa lembab, suara tali kapal berderit, dan dari kejauhan terdengar orang-orang mulai memanggil satu sama lain.",
+      "id": "v001",
+      "t0": 0,
+      "t1": 9.98,
+      "dur": 9.98,
+      "chapter": "ch1"
+    },
+    {
+      "text": "Kamu bukan sedang berlibur.",
+      "id": "v002",
+      "t0": 10,
+      "t1": 11.98,
+      "dur": 1.98,
+      "chapter": "ch1"
+    },
+    {
+      "text": "Hari ini, kamu harus berdagang di salah satu tempat paling penting dalam jaringan rempah Nusantara, Kepulauan Banda.",
+      "id": "v003",
+      "t0": 12,
+      "t1": 18.98,
+      "dur": 6.98,
+      "chapter": "ch1"
+    },
+    {
+      "text": "Namaku Najmi. Aku datang dari pesisir utara Jawa bersama sebuah kapal dagang milik pamanku.",
+      "id": "v004",
+      "t0": 19,
+      "t1": 24.98,
+      "dur": 5.98,
+      "chapter": "ch1"
+    },
+    {
+      "text": "Di dalam kapal, kami membawa beras dan kain dagangan.",
+      "id": "v005",
+      "t0": 25,
+      "t1": 27.98,
+      "dur": 2.98,
+      "chapter": "ch1"
+    },
+    {
+      "text": "Tujuan kami sederhana, setidaknya menurutku.",
+      "id": "v006",
+      "t0": 28,
+      "t1": 30.98,
+      "dur": 2.98,
+      "chapter": "ch1"
+    },
+    {
+      "text": "Menukar barang-barang itu dengan pala dan fuli, lalu pulang membawa keuntungan.",
+      "id": "v007",
+      "t0": 31,
+      "t1": 35.98,
+      "dur": 4.98,
+      "chapter": "ch1"
+    },
+    {
+      "text": "Tapi aku segera sadar, berdagang di Jalur Rempah tidak sesederhana membawa barang lalu menukarnya.",
+      "id": "v008",
+      "t0": 36,
+      "t1": 41.98,
+      "dur": 5.98,
+      "chapter": "ch1"
+    },
+    {
+      "text": "Pagi itu, pelabuhan mulai ramai.",
+      "id": "v009",
+      "t0": 42,
+      "t1": 43.98,
+      "dur": 1.98,
+      "chapter": "ch2"
+    },
+    {
+      "text": "Perahu-perahu kecil bergerak di antara kapal yang lebih besar.",
+      "id": "v010",
+      "t0": 44,
+      "t1": 46.98,
+      "dur": 2.98,
+      "chapter": "ch2"
+    },
+    {
+      "text": "Para awak mengangkat karung, menggulung tali, dan menurunkan barang dagangan.",
+      "id": "v011",
+      "t0": 47,
+      "t1": 50.98,
+      "dur": 3.98,
+      "chapter": "ch2"
+    },
+    {
+      "text": "Ada pedagang yang datang dari pulau lain, ada yang sudah berkali-kali singgah, dan ada juga orang sepertiku yang masih belajar mengenali wajah-wajah di pelabuhan.",
+      "id": "v012",
+      "t0": 51,
+      "t1": 59.98,
+      "dur": 8.98,
+      "chapter": "ch2"
+    },
+    {
+      "text": "Banda bukan tempat biasa.",
+      "id": "v013",
+      "t0": 60,
+      "t1": 61.98,
+      "dur": 1.98,
+      "chapter": "ch2"
+    },
+    {
+      "text": "Di pulau-pulau inilah pala dan fuli tumbuh.",
+      "id": "v014",
+      "t0": 62,
+      "t1": 64.98,
+      "dur": 2.98,
+      "chapter": "ch2"
+    },
+    {
+      "text": "Pala adalah biji yang tersembunyi di dalam buah, sedangkan fuli adalah selaput merah yang membungkus biji itu.",
+      "id": "v015",
+      "t0": 65,
+      "t1": 70.98,
+      "dur": 5.98,
+      "chapter": "ch2"
+    },
+    {
+      "text": "Keduanya bisa dikeringkan dan dibawa jauh melintasi laut.",
+      "id": "v016",
+      "t0": 71,
+      "t1": 73.98,
+      "dur": 2.98,
+      "chapter": "ch2"
+    },
+    {
+      "text": "Ukurannya kecil, tetapi nilainya besar.",
+      "id": "v017",
+      "t0": 74,
+      "t1": 76.98,
+      "dur": 2.98,
+      "chapter": "ch2"
+    },
+    {
+      "text": "Aku membantu menurunkan karung beras dari kapal.",
+      "id": "v018",
+      "t0": 77,
+      "t1": 79.98,
+      "dur": 2.98,
+      "chapter": "ch2"
+    },
+    {
+      "text": "Beras itu berasal dari Jawa, dibawa untuk diperdagangkan dengan hasil bumi Banda.",
+      "id": "v019",
+      "t0": 80,
+      "t1": 83.98,
+      "dur": 3.98,
+      "chapter": "ch2"
+    },
+    {
+      "text": "Kain-kain yang kami bawa juga punya peminat.",
+      "id": "v020",
+      "t0": 84,
+      "t1": 86.98,
+      "dur": 2.98,
+      "chapter": "ch2"
+    },
+    {
+      "text": "Di tempat seperti ini, barang dari satu pulau bisa menjadi kebutuhan bagi pulau lain.",
+      "id": "v021",
+      "t0": 87,
+      "t1": 91.98,
+      "dur": 4.98,
+      "chapter": "ch2"
+    },
+    {
+      "text": "Kapal tidak selalu berlayar hanya membawa rempah.",
+      "id": "v022",
+      "t0": 92,
+      "t1": 94.98,
+      "dur": 2.98,
+      "chapter": "ch2"
+    },
+    {
+      "text": "Mereka membawa beras, kain, keramik, logam, kabar, dan cerita dari tempat-tempat yang bahkan belum pernah kubayangkan.",
+      "id": "v023",
+      "t0": 95,
+      "t1": 102.98,
+      "dur": 7.98,
+      "chapter": "ch2"
+    },
+    {
+      "text": "Setelah barang kami diturunkan, pamanku memberiku tugas pertama, memeriksa kualitas pala yang akan kami beli.",
+      "id": "v024",
+      "t0": 103,
+      "t1": 108.98,
+      "dur": 5.98,
+      "chapter": "ch3"
+    },
+    {
+      "text": "Aku berjalan melewati lapak-lapak sederhana.",
+      "id": "v025",
+      "t0": 109,
+      "t1": 110.98,
+      "dur": 1.98,
+      "chapter": "ch3"
+    },
+    {
+      "text": "Di beberapa tempat, buah pala yang baru dipetik sedang dibuka.",
+      "id": "v026",
+      "t0": 111,
+      "t1": 114.98,
+      "dur": 3.98,
+      "chapter": "ch3"
+    },
+    {
+      "text": "Ada yang memisahkan kulit buah, biji, dan fuli.",
+      "id": "v027",
+      "t0": 115,
+      "t1": 118.98,
+      "dur": 3.98,
+      "chapter": "ch3"
+    },
+    {
+      "text": "Ada pula yang menjemur hasil panen agar kering sebelum disimpan.",
+      "id": "v028",
+      "t0": 119,
+      "t1": 121.98,
+      "dur": 2.98,
+      "chapter": "ch3"
+    },
+    {
+      "text": "Aroma khas pala terasa di udara, bercampur bau kayu kapal, garam, dan laut.",
+      "id": "v029",
+      "t0": 122,
+      "t1": 127.98,
+      "dur": 5.98,
+      "chapter": "ch3"
+    },
+    {
+      "text": "Awalnya, aku mengira semua pala terlihat sama.",
+      "id": "v030",
+      "t0": 128,
+      "t1": 130.98,
+      "dur": 2.98,
+      "chapter": "ch3"
+    },
+    {
+      "text": "Ternyata tidak!",
+      "id": "v031",
+      "t0": 131,
+      "t1": 131.98,
+      "dur": 0.98,
+      "chapter": "ch3"
+    },
+    {
+      "text": "Ada yang kering dengan baik, ada yang masih terasa lembab, ada yang ukurannya lebih besar, dan ada yang kulit bijinya terlihat rusak.",
+      "id": "v032",
+      "t0": 132,
+      "t1": 139.98,
+      "dur": 7.98,
+      "chapter": "ch3"
+    },
+    {
+      "text": "Pamanku mengajariku bahwa barang bagus bukan hanya soal tampilan.",
+      "id": "v033",
+      "t0": 140,
+      "t1": 143.98,
+      "dur": 3.98,
+      "chapter": "ch3"
+    },
+    {
+      "text": "Perjalanan laut bisa memakan waktu lama.",
+      "id": "v034",
+      "t0": 144,
+      "t1": 146.98,
+      "dur": 2.98,
+      "chapter": "ch3"
+    },
+    {
+      "text": "Rempah yang belum cukup kering dapat rusak di tengah perjalanan.",
+      "id": "v035",
+      "t0": 147,
+      "t1": 149.98,
+      "dur": 2.98,
+      "chapter": "ch3"
+    },
+    {
+      "text": "Satu karung yang salah pilih bisa mengurangi keuntungan seluruh pelayaran.",
+      "id": "v036",
+      "t0": 150,
+      "t1": 154.98,
+      "dur": 4.98,
+      "chapter": "ch3"
+    },
+    {
+      "text": "Menjelang siang, aku mulai berani ikut menawar.",
+      "id": "v037",
+      "t0": 155,
+      "t1": 157.98,
+      "dur": 2.98,
+      "chapter": "ch4"
+    },
+    {
+      "text": "Seorang pedagang menawarkan pala dengan harga yang tampak sangat menguntungkan.",
+      "id": "v038",
+      "t0": 158,
+      "t1": 161.98,
+      "dur": 3.98,
+      "chapter": "ch4"
+    },
+    {
+      "text": "Jumlahnya banyak, dan kalau berhasil kubeli murah, kami bisa pulang dengan laba besar.",
+      "id": "v039",
+      "t0": 162,
+      "t1": 166.98,
+      "dur": 4.98,
+      "chapter": "ch4"
+    },
+    {
+      "text": "Namun, ketika aku memeriksa karung bagian bawah, aku menemukan beberapa biji yang masih lembab.",
+      "id": "v040",
+      "t0": 167,
+      "t1": 172.98,
+      "dur": 5.98,
+      "chapter": "ch4"
+    },
+    {
+      "text": "Ada juga yang aromanya tidak sekuat sampel di atas.",
+      "id": "v041",
+      "t0": 173,
+      "t1": 175.98,
+      "dur": 2.98,
+      "chapter": "ch4"
+    },
+    {
+      "text": "Aku hampir saja mengabaikannya.",
+      "id": "v042",
+      "t0": 176,
+      "t1": 178.98,
+      "dur": 2.98,
+      "chapter": "ch4"
+    },
+    {
+      "text": "Bagiku, kesempatan mendapatkan barang murah terasa terlalu bagus untuk dilewatkan.",
+      "id": "v043",
+      "t0": 179,
+      "t1": 183.98,
+      "dur": 4.98,
+      "chapter": "ch4"
+    },
+    {
+      "text": "Tapi, aku teringat pesan pamanku.",
+      "id": "v044",
+      "t0": 184,
+      "t1": 185.98,
+      "dur": 1.98,
+      "chapter": "ch4"
+    },
+    {
+      "text": "Jangan hanya melihat harga ketika membeli barang yang harus menempuh lautan.",
+      "id": "v045",
+      "t0": 186,
+      "t1": 189.98,
+      "dur": 3.98,
+      "chapter": "ch4"
+    },
+    {
+      "text": "Aku meminta agar karung-karung itu dibuka dan diperiksa ulang.",
+      "id": "v046",
+      "t0": 190,
+      "t1": 193.98,
+      "dur": 3.98,
+      "chapter": "ch4"
+    },
+    {
+      "text": "Ternyata, sebagian isinya memang belum cukup kering.",
+      "id": "v047",
+      "t0": 194,
+      "t1": 196.98,
+      "dur": 2.98,
+      "chapter": "ch4"
+    },
+    {
+      "text": "Pedagang itu tidak marah.",
+      "id": "v048",
+      "t0": 197,
+      "t1": 198.98,
+      "dur": 1.98,
+      "chapter": "ch4"
+    },
+    {
+      "text": "Ia menjelaskan bahwa cuaca beberapa hari terakhir membuat proses penjemuran lebih sulit.",
+      "id": "v049",
+      "t0": 199,
+      "t1": 203.98,
+      "dur": 4.98,
+      "chapter": "ch4"
+    },
+    {
+      "text": "Kami akhirnya mengurangi jumlah pembelian dan menyepakati harga yang lebih sesuai untuk bagian yang kualitasnya baik.",
+      "id": "v050",
+      "t0": 204,
+      "t1": 209.98,
+      "dur": 5.98,
+      "chapter": "ch4"
+    },
+    {
+      "text": "Itu pertama kalinya aku menyadari bahwa tawar-menawar bukan sekadar mencari harga serendah mungkin.",
+      "id": "v051",
+      "t0": 210,
+      "t1": 215.98,
+      "dur": 5.98,
+      "chapter": "ch4"
+    },
+    {
+      "text": "Kedua pihak harus memahami kualitas barang, risiko perjalanan, dan kepercayaan yang akan dibawa sampai transaksi berikutnya.",
+      "id": "v052",
+      "t0": 216,
+      "t1": 224.98,
+      "dur": 8.98,
+      "chapter": "ch4"
+    },
+    {
+      "text": "Sesudah urusan pala selesai, kami mencari fuli.",
+      "id": "v053",
+      "t0": 225,
+      "t1": 227.98,
+      "dur": 2.98,
+      "chapter": "ch5"
+    },
+    {
+      "text": "Warnanya merah jingga, bentuknya seperti jaring tipis yang melingkari biji pala.",
+      "id": "v054",
+      "t0": 228,
+      "t1": 232.98,
+      "dur": 4.98,
+      "chapter": "ch5"
+    },
+    {
+      "text": "Ketika sudah dikeringkan, fuli menjadi lebih kaku dan ringan.",
+      "id": "v055",
+      "t0": 233,
+      "t1": 235.98,
+      "dur": 2.98,
+      "chapter": "ch5"
+    },
+    {
+      "text": "Aku takjub melihat bagaimana satu buah bisa menghasilkan dua komoditas yang berbeda.",
+      "id": "v056",
+      "t0": 236,
+      "t1": 241.98,
+      "dur": 5.98,
+      "chapter": "ch5"
+    },
+    {
+      "text": "Di tengah kesibukan pasar, aku juga mulai memperhatikan orang-orang di sekelilingku.",
+      "id": "v057",
+      "t0": 242,
+      "t1": 245.98,
+      "dur": 3.98,
+      "chapter": "ch5"
+    },
+    {
+      "text": "Ada pedagang yang menggunakan bahasa berbeda, awak kapal yang saling membantu mengangkat muatan, dan pembeli yang datang membawa barang dari tempat jauh.",
+      "id": "v058",
+      "t0": 246,
+      "t1": 254.98,
+      "dur": 8.98,
+      "chapter": "ch5"
+    },
+    {
+      "text": "Tak semua orang mengenal satu sama lain, tetapi mereka memahami satu hal.",
+      "id": "v059",
+      "t0": 255,
+      "t1": 259.98,
+      "dur": 4.98,
+      "chapter": "ch5"
+    },
+    {
+      "text": "Perdagangan hanya berjalan kalau orang mau saling percaya.",
+      "id": "v060",
+      "t0": 260,
+      "t1": 263.98,
+      "dur": 3.98,
+      "chapter": "ch5"
+    },
+    {
+      "text": "Siang bergeser menjadi sore.",
+      "id": "v061",
+      "t0": 264,
+      "t1": 265.98,
+      "dur": 1.98,
+      "chapter": "ch6"
+    },
+    {
+      "text": "Awan gelap berkumpul di atas laut.",
+      "id": "v062",
+      "t0": 266,
+      "t1": 268.98,
+      "dur": 2.98,
+      "chapter": "ch6"
+    },
+    {
+      "text": "Angin berubah, dan para awak mulai mempercepat pekerjaan.",
+      "id": "v063",
+      "t0": 269,
+      "t1": 272.98,
+      "dur": 3.98,
+      "chapter": "ch6"
+    },
+    {
+      "text": "Karung-karung pala dan fuli harus dibungkus rapat.",
+      "id": "v064",
+      "t0": 273,
+      "t1": 274.98,
+      "dur": 1.98,
+      "chapter": "ch6"
+    },
+    {
+      "text": "Dijauhkan dari air, lalu disusun di bagian kapal yang aman.",
+      "id": "v065",
+      "t0": 275,
+      "t1": 278.98,
+      "dur": 3.98,
+      "chapter": "ch6"
+    },
+    {
+      "text": "Barang dagangan bukan sekadar muatan.",
+      "id": "v066",
+      "t0": 279,
+      "t1": 281.76300000000003,
+      "dur": 2.763,
+      "chapter": "ch6"
+    },
+    {
+      "text": "Di dalam setiap karung ada hasil kerja banyak orang.",
+      "id": "v067",
+      "t0": 281.783,
+      "t1": 284.76300000000003,
+      "dur": 2.98,
+      "chapter": "ch6"
+    },
+    {
+      "text": "Mereka yang menanam, merawat, memanen, mengeringkan, mengangkut, dan menjualnya.",
+      "id": "v068",
+      "t0": 284.783,
+      "t1": 290.76300000000003,
+      "dur": 5.98,
+      "chapter": "ch6"
+    },
+    {
+      "text": "Sebelum hari berakhir, aku menghitung kembali barang yang kami dapatkan.",
+      "id": "v069",
+      "t0": 290.783,
+      "t1": 294.76300000000003,
+      "dur": 3.98,
+      "chapter": "ch6"
+    },
+    {
+      "text": "Tidak sebanyak yang kuharapkan saat pagi.",
+      "id": "v070",
+      "t0": 294.783,
+      "t1": 297.76300000000003,
+      "dur": 2.98,
+      "chapter": "ch6"
+    },
+    {
+      "text": "Tetapi kualitasnya lebih terjaga, dan kami tidak menghabiskan bekal untuk membeli barang yang berisiko rusak.",
+      "id": "v071",
+      "t0": 297.783,
+      "t1": 303.76300000000003,
+      "dur": 5.98,
+      "chapter": "ch6"
+    },
+    {
+      "text": "Saat matahari mulai tenggelam, pelabuhan perlahan berubah warna.",
+      "id": "v072",
+      "t0": 303.783,
+      "t1": 307.76300000000003,
+      "dur": 3.98,
+      "chapter": "ch7"
+    },
+    {
+      "text": "Kapal-kapal bergoyang pelan, sementara orang-orang membereskan sisa pekerjaan.",
+      "id": "v073",
+      "t0": 307.783,
+      "t1": 312.76300000000003,
+      "dur": 4.98,
+      "chapter": "ch7"
+    },
+    {
+      "text": "Aku duduk di dekat tumpukan karung, memandangi laut yang sejak pagi terasa seperti jalan raya tanpa ujung.",
+      "id": "v074",
+      "t0": 312.783,
+      "t1": 318.76300000000003,
+      "dur": 5.98,
+      "chapter": "ch7"
+    },
+    {
+      "text": "Baru hari itu aku mengerti mengapa tempat ini begitu penting.",
+      "id": "v075",
+      "t0": 318.783,
+      "t1": 322.76300000000003,
+      "dur": 3.98,
+      "chapter": "ch7"
+    },
+    {
+      "text": "Jalur rempah bukan sekadar jalur untuk mengirim pala dan cengkih.",
+      "id": "v076",
+      "t0": 322.783,
+      "t1": 325.76300000000003,
+      "dur": 2.98,
+      "chapter": "ch7"
+    },
+    {
+      "text": "Ia adalah jaringan besar yang menghubungkan pulau-pulau, pelabuhan, dan masyarakat.",
+      "id": "v077",
+      "t0": 325.783,
+      "t1": 330.76300000000003,
+      "dur": 4.98,
+      "chapter": "ch7"
+    },
+    {
+      "text": "Dari Banda, pala dan fuli bisa bergerak ke berbagai pelabuhan Nusantara, lalu diteruskan ke pasar-pasar yang jauh.",
+      "id": "v078",
+      "t0": 330.783,
+      "t1": 337.76300000000003,
+      "dur": 6.98,
+      "chapter": "ch7"
+    },
+    {
+      "text": "Sebaliknya, barang, kabar, kebiasaan, dan pengetahuan dari tempat lain ikut tiba di sini.",
+      "id": "v079",
+      "t0": 337.783,
+      "t1": 343.76300000000003,
+      "dur": 5.98,
+      "chapter": "ch7"
+    },
+    {
+      "text": "Dulu aku mengira seorang pedagang hanya perlu membeli murah dan menjual mahal.",
+      "id": "v080",
+      "t0": 343.783,
+      "t1": 348.76300000000003,
+      "dur": 4.98,
+      "chapter": "ch7"
+    },
+    {
+      "text": "Sekarang aku tahu, seorang pedagang juga harus membaca cuaca, memahami mutu barang, menghitung risiko, mengenali orang, dan menjaga kepercayaan.",
+      "id": "v081",
+      "t0": 348.783,
+      "t1": 357.76300000000003,
+      "dur": 8.98,
+      "chapter": "ch7"
+    },
+    {
+      "text": "Malam itu, aku tidur dengan bau pala masih menempel di bajuku.",
+      "id": "v082",
+      "t0": 357.783,
+      "t1": 361.76300000000003,
+      "dur": 3.98,
+      "chapter": "ch7"
+    },
+    {
+      "text": "Besok, kapal kami mungkin akan berlayar lagi menuju pelabuhan berikutnya.",
+      "id": "v083",
+      "t0": 361.783,
+      "t1": 365.76300000000003,
+      "dur": 3.98,
+      "chapter": "ch7"
+    },
+    {
+      "text": "Aku belum tahu apa yang menunggu di sana, tapi satu hal sudah pasti.",
+      "id": "v084",
+      "t0": 365.783,
+      "t1": 370.76300000000003,
+      "dur": 4.98,
+      "chapter": "ch7"
+    },
+    {
+      "text": "Hari ini aku tidak hanya belajar berdagang.",
+      "id": "v085",
+      "t0": 370.783,
+      "t1": 372.76300000000003,
+      "dur": 1.98,
+      "chapter": "ch7"
+    },
+    {
+      "text": "Aku belajar bahwa rempah sekecil biji pala bisa menghubungkan dunia yang begitu luas.",
+      "id": "v086",
+      "t0": 372.783,
+      "t1": 378.76300000000003,
+      "dur": 5.98,
+      "chapter": "ch7"
+    },
+    {
+      "text": "Dan di antara ombak, layar, serta karung-karung dagangan itu, aku baru saja menjadi bagian kecil dari perjalanan besar bernama Jalur Rempah.",
+      "id": "v087",
+      "t0": 378.783,
+      "t1": 387.76300000000003,
+      "dur": 8.98,
+      "chapter": "ch7"
+    },
+    {
+      "text": "Terima kasih.",
+      "id": "v088",
+      "t0": 387.783,
+      "t1": 388.2318,
+      "dur": 0.449,
+      "chapter": "ch7"
+    }
+  ]
+}

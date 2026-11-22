@@ -1,0 +1,6 @@
+node_modules/
+out/
+audio/
+voices/*.wav
+voices/raw/
+voices/dur.json
