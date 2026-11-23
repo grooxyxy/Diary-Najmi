@@ -3,6 +3,8 @@ out/
 audio/
 !mal-satpam/audio/
 !mal-satpam/audio/VO.mp3
+!mal-satpam/kit/core/audio/
+!mal-satpam/kit/core/audio/sfx.py
 voices/*.wav
 voices/raw/
 voices/dur.json
