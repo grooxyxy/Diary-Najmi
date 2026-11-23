@@ -1,0 +1,6 @@
+node_modules/
+out/
+_data/
+_chunks/
+list.txt
+.DS_Store

@@ -1,0 +1,848 @@
+{
+ "dur": 125.649,
+ "lines": [
+  {
+   "id": "v00",
+   "T": 0,
+   "a": 0.09,
+   "b": 4.47,
+   "text": "Pukul 23.40. Lampu toko padam satu per satu,",
+   "chunks": [
+    {
+     "t0": 0.09,
+     "t1": 3.076,
+     "text": "Pukul 23.40. Lampu toko"
+    },
+    {
+     "t0": 3.076,
+     "t1": 4.47,
+     "text": "padam satu per satu,"
+    }
+   ]
+  },
+  {
+   "id": "v01",
+   "T": 4,
+   "a": 4.56,
+   "b": 10.03,
+   "text": "dan kamu baru sadar: kamu satu-satunya orang yang tersisa di gedung lima lantai ini.",
+   "chunks": [
+    {
+     "t0": 4.56,
+     "t1": 5.88,
+     "text": "dan kamu baru sadar:"
+    },
+    {
+     "t0": 5.88,
+     "t1": 7.767,
+     "text": "kamu satu-satunya orang yang"
+    },
+    {
+     "t0": 7.767,
+     "t1": 10.03,
+     "text": "tersisa di gedung lima lantai ini."
+    }
+   ]
+  },
+  {
+   "id": "v02",
+   "T": 10,
+   "a": 10.57,
+   "b": 11.54,
+   "text": "Tugasmu sederhana.",
+   "chunks": [
+    {
+     "t0": 10.57,
+     "t1": 11.54,
+     "text": "Tugasmu sederhana."
+    }
+   ]
+  },
+  {
+   "id": "v03",
+   "T": 11,
+   "a": 11.96,
+   "b": 17.7,
+   "text": "Keliling setiap lantai, cek pintu toko, matikan eskalator, lalu duduk di pos jaga sampai pagi.",
+   "chunks": [
+    {
+     "t0": 11.96,
+     "t1": 14.182,
+     "text": "Keliling setiap lantai, cek pintu toko,"
+    },
+    {
+     "t0": 14.182,
+     "t1": 15.478,
+     "text": "matikan eskalator,"
+    },
+    {
+     "t0": 15.478,
+     "t1": 17.7,
+     "text": "lalu duduk di pos jaga sampai pagi."
+    }
+   ]
+  },
+  {
+   "id": "v04",
+   "T": 18,
+   "a": 18.2,
+   "b": 19.57,
+   "text": "Senter di tanganmu kecil.",
+   "chunks": [
+    {
+     "t0": 18.2,
+     "t1": 19.57,
+     "text": "Senter di tanganmu kecil."
+    }
+   ]
+  },
+  {
+   "id": "v05",
+   "T": 19,
+   "a": 20.03,
+   "b": 22.52,
+   "text": "Cahayanya hanya cukup untuk dua langkah ke depan.",
+   "chunks": [
+    {
+     "t0": 20.03,
+     "t1": 21.586,
+     "text": "Cahayanya hanya cukup untuk"
+    },
+    {
+     "t0": 21.586,
+     "t1": 22.52,
+     "text": "dua langkah ke depan."
+    }
+   ]
+  },
+  {
+   "id": "v06",
+   "T": 22,
+   "a": 23.12,
+   "b": 24.15,
+   "text": "Lantai satu sunyi.",
+   "chunks": [
+    {
+     "t0": 23.12,
+     "t1": 24.15,
+     "text": "Lantai satu sunyi."
+    }
+   ]
+  },
+  {
+   "id": "v07",
+   "T": 24,
+   "a": 24.66,
+   "b": 29.4,
+   "text": "Air mancur di tengah atrium masih mengalir, dan suaranya terlalu keras untuk ruangan sekosong ini.",
+   "chunks": [
+    {
+     "t0": 24.66,
+     "t1": 25.577,
+     "text": "Air mancur di tengah"
+    },
+    {
+     "t0": 25.577,
+     "t1": 26.648,
+     "text": "atrium masih mengalir,"
+    },
+    {
+     "t0": 26.648,
+     "t1": 28.024,
+     "text": "dan suaranya terlalu keras"
+    },
+    {
+     "t0": 28.024,
+     "t1": 29.4,
+     "text": "untuk ruangan sekosong ini."
+    }
+   ]
+  },
+  {
+   "id": "v08",
+   "T": 29,
+   "a": 29.91,
+   "b": 31.77,
+   "text": "Eskalator berhenti satu per satu.",
+   "chunks": [
+    {
+     "t0": 29.91,
+     "t1": 31.77,
+     "text": "Eskalator berhenti satu per satu."
+    }
+   ]
+  },
+  {
+   "id": "v09",
+   "T": 31,
+   "a": 32.08,
+   "b": 34.86,
+   "text": "Bunyi berhentinya menggema sampai ke lantai paling atas.",
+   "chunks": [
+    {
+     "t0": 32.08,
+     "t1": 33.47,
+     "text": "Bunyi berhentinya menggema"
+    },
+    {
+     "t0": 33.47,
+     "t1": 34.86,
+     "text": "sampai ke lantai paling atas."
+    }
+   ]
+  },
+  {
+   "id": "v10",
+   "T": 35,
+   "a": 35.27,
+   "b": 36.36,
+   "text": "Kamu naik ke lantai dua.",
+   "chunks": [
+    {
+     "t0": 35.27,
+     "t1": 36.36,
+     "text": "Kamu naik ke lantai dua."
+    }
+   ]
+  },
+  {
+   "id": "v11",
+   "T": 36,
+   "a": 36.73,
+   "b": 41.38,
+   "text": "Deretan toko pakaian, etalase kaca, dan manekin yang berdiri kaku di baliknya.",
+   "chunks": [
+    {
+     "t0": 36.73,
+     "t1": 38.969,
+     "text": "Deretan toko pakaian, etalase kaca,"
+    },
+    {
+     "t0": 38.969,
+     "t1": 41.38,
+     "text": "dan manekin yang berdiri kaku di baliknya."
+    }
+   ]
+  },
+  {
+   "id": "v12",
+   "T": 41,
+   "a": 41.78,
+   "b": 44.1,
+   "text": "Tanpa sadar, kamu mulai menghitung.",
+   "chunks": [
+    {
+     "t0": 41.78,
+     "t1": 44.1,
+     "text": "Tanpa sadar, kamu mulai menghitung."
+    }
+   ]
+  },
+  {
+   "id": "v13",
+   "T": 43,
+   "a": 44.24,
+   "b": 48.27,
+   "text": "Satu, dua, tiga, empat, lima, enam, tujuh.",
+   "chunks": [
+    {
+     "t0": 44.24,
+     "t1": 48.27,
+     "text": "Satu, dua, tiga, empat, lima, enam, tujuh."
+    }
+   ]
+  },
+  {
+   "id": "v14",
+   "T": 49,
+   "a": 48.6,
+   "b": 51.28,
+   "text": "Tujuh manekin di etalase paling ujung.",
+   "chunks": [
+    {
+     "t0": 48.6,
+     "t1": 51.28,
+     "text": "Tujuh manekin di etalase paling ujung."
+    }
+   ]
+  },
+  {
+   "id": "v15",
+   "T": 51,
+   "a": 51.85,
+   "b": 52.46,
+   "text": "Kamu berhenti.",
+   "chunks": [
+    {
+     "t0": 51.85,
+     "t1": 52.46,
+     "text": "Kamu berhenti."
+    }
+   ]
+  },
+  {
+   "id": "v16",
+   "T": 52,
+   "a": 52.88,
+   "b": 55.26,
+   "text": "Tadi sore, kamu yakin hanya ada enam.",
+   "chunks": [
+    {
+     "t0": 52.88,
+     "t1": 55.26,
+     "text": "Tadi sore, kamu yakin hanya ada enam."
+    }
+   ]
+  },
+  {
+   "id": "v17",
+   "T": 55,
+   "a": 55.78,
+   "b": 56.67,
+   "text": "Mungkin salah hitung.",
+   "chunks": [
+    {
+     "t0": 55.78,
+     "t1": 56.67,
+     "text": "Mungkin salah hitung."
+    }
+   ]
+  },
+  {
+   "id": "v18",
+   "T": 56,
+   "a": 57.03,
+   "b": 59.82,
+   "text": "Kamu melangkah pergi, sedikit lebih cepat dari sebelumnya.",
+   "chunks": [
+    {
+     "t0": 57.03,
+     "t1": 58.006,
+     "text": "Kamu melangkah pergi,"
+    },
+    {
+     "t0": 58.006,
+     "t1": 59.82,
+     "text": "sedikit lebih cepat dari sebelumnya."
+    }
+   ]
+  },
+  {
+   "id": "v19",
+   "T": 60,
+   "a": 60.24,
+   "b": 60.94,
+   "text": "Lantai tiga.",
+   "chunks": [
+    {
+     "t0": 60.24,
+     "t1": 60.94,
+     "text": "Lantai tiga."
+    }
+   ]
+  },
+  {
+   "id": "v20",
+   "T": 61,
+   "a": 61.32,
+   "b": 61.93,
+   "text": "Toko mainan.",
+   "chunks": [
+    {
+     "t0": 61.32,
+     "t1": 61.93,
+     "text": "Toko mainan."
+    }
+   ]
+  },
+  {
+   "id": "v21",
+   "T": 62,
+   "a": 62.32,
+   "b": 64.98,
+   "text": "Di sebuah rak, kotak musik kecil berbunyi sendiri.",
+   "chunks": [
+    {
+     "t0": 62.32,
+     "t1": 62.985,
+     "text": "Di sebuah rak,"
+    },
+    {
+     "t0": 62.985,
+     "t1": 64.98,
+     "text": "kotak musik kecil berbunyi sendiri."
+    }
+   ]
+  },
+  {
+   "id": "v22",
+   "T": 65,
+   "a": 65.36,
+   "b": 70.09,
+   "text": "Melodinya pelan dan tersendat-sendat, seperti dimainkan oleh seseorang yang tidak hafal lagunya.",
+   "chunks": [
+    {
+     "t0": 65.36,
+     "t1": 67.191,
+     "text": "Melodinya pelan dan tersendat-sendat,"
+    },
+    {
+     "t0": 67.191,
+     "t1": 68.869,
+     "text": "seperti dimainkan oleh seseorang"
+    },
+    {
+     "t0": 68.869,
+     "t1": 70.09,
+     "text": "yang tidak hafal lagunya."
+    }
+   ]
+  },
+  {
+   "id": "v23",
+   "T": 70,
+   "a": 70.48,
+   "b": 71.52,
+   "text": "Kamu menutup tutupnya.",
+   "chunks": [
+    {
+     "t0": 70.48,
+     "t1": 71.52,
+     "text": "Kamu menutup tutupnya."
+    }
+   ]
+  },
+  {
+   "id": "v24",
+   "T": 71,
+   "a": 71.97,
+   "b": 72.34,
+   "text": "Sunyi.",
+   "chunks": [
+    {
+     "t0": 71.97,
+     "t1": 72.34,
+     "text": "Sunyi."
+    }
+   ]
+  },
+  {
+   "id": "v25",
+   "T": 72,
+   "a": 72.76,
+   "b": 73.77,
+   "text": "Kamu berjalan menjauh.",
+   "chunks": [
+    {
+     "t0": 72.76,
+     "t1": 73.77,
+     "text": "Kamu berjalan menjauh."
+    }
+   ]
+  },
+  {
+   "id": "v26",
+   "T": 74,
+   "a": 74.2,
+   "b": 74.85,
+   "text": "Lima langkah.",
+   "chunks": [
+    {
+     "t0": 74.2,
+     "t1": 74.85,
+     "text": "Lima langkah."
+    }
+   ]
+  },
+  {
+   "id": "v27",
+   "T": 75,
+   "a": 75.19,
+   "b": 75.6,
+   "text": "Sepuluh.",
+   "chunks": [
+    {
+     "t0": 75.19,
+     "t1": 75.6,
+     "text": "Sepuluh."
+    }
+   ]
+  },
+  {
+   "id": "v28",
+   "T": 75,
+   "a": 76.12,
+   "b": 77.28,
+   "text": "Lagu itu mulai lagi.",
+   "chunks": [
+    {
+     "t0": 76.12,
+     "t1": 77.28,
+     "text": "Lagu itu mulai lagi."
+    }
+   ]
+  },
+  {
+   "id": "v29",
+   "T": 77,
+   "a": 77.65,
+   "b": 80.3,
+   "text": "Dan kali ini, suaranya datang dari belakangmu.",
+   "chunks": [
+    {
+     "t0": 77.65,
+     "t1": 78.478,
+     "text": "Dan kali ini,"
+    },
+    {
+     "t0": 78.478,
+     "t1": 80.3,
+     "text": "suaranya datang dari belakangmu."
+    }
+   ]
+  },
+  {
+   "id": "v30",
+   "T": 80,
+   "a": 80.62,
+   "b": 81.95,
+   "text": "Kamu tidak naik ke lantai empat.",
+   "chunks": [
+    {
+     "t0": 80.62,
+     "t1": 81.95,
+     "text": "Kamu tidak naik ke lantai empat."
+    }
+   ]
+  },
+  {
+   "id": "v31",
+   "T": 81,
+   "a": 82.27,
+   "b": 86.48,
+   "text": "Kamu turun, hampir berlari, kembali ke pos jaga dan menyalakan layar CCTV.",
+   "chunks": [
+    {
+     "t0": 82.27,
+     "t1": 83.623,
+     "text": "Kamu turun, hampir berlari,"
+    },
+    {
+     "t0": 83.623,
+     "t1": 84.826,
+     "text": "kembali ke pos jaga dan"
+    },
+    {
+     "t0": 84.826,
+     "t1": 86.48,
+     "text": "menyalakan layar CCTV."
+    }
+   ]
+  },
+  {
+   "id": "v32",
+   "T": 86,
+   "a": 86.81,
+   "b": 88.08,
+   "text": "Lantai satu, kosong.",
+   "chunks": [
+    {
+     "t0": 86.81,
+     "t1": 88.08,
+     "text": "Lantai satu, kosong."
+    }
+   ]
+  },
+  {
+   "id": "v33",
+   "T": 88,
+   "a": 88.43,
+   "b": 89.7,
+   "text": "Lantai tiga, kosong.",
+   "chunks": [
+    {
+     "t0": 88.43,
+     "t1": 89.7,
+     "text": "Lantai tiga, kosong."
+    }
+   ]
+  },
+  {
+   "id": "v34",
+   "T": 89,
+   "a": 89.99,
+   "b": 91.47,
+   "text": "Kotak musik, tertutup rapat.",
+   "chunks": [
+    {
+     "t0": 89.99,
+     "t1": 91.47,
+     "text": "Kotak musik, tertutup rapat."
+    }
+   ]
+  },
+  {
+   "id": "v35",
+   "T": 91,
+   "a": 91.83,
+   "b": 93.57,
+   "text": "Lantai dua, etalase pakaian.",
+   "chunks": [
+    {
+     "t0": 91.83,
+     "t1": 93.57,
+     "text": "Lantai dua, etalase pakaian."
+    }
+   ]
+  },
+  {
+   "id": "v36",
+   "T": 93,
+   "a": 93.92,
+   "b": 95.61,
+   "text": "Kamu menghitung lagi.",
+   "chunks": [
+    {
+     "t0": 93.92,
+     "t1": 95.61,
+     "text": "Kamu menghitung lagi."
+    }
+   ]
+  },
+  {
+   "id": "v37",
+   "T": 95,
+   "a": 95.82,
+   "b": 98.82,
+   "text": "Satu, dua, tiga, empat, lima, enam.",
+   "chunks": [
+    {
+     "t0": 95.82,
+     "t1": 98.82,
+     "text": "Satu, dua, tiga, empat, lima, enam."
+    }
+   ]
+  },
+  {
+   "id": "v38",
+   "T": 99,
+   "a": 99.15,
+   "b": 99.44,
+   "text": "Enam.",
+   "chunks": [
+    {
+     "t0": 99.15,
+     "t1": 99.44,
+     "text": "Enam."
+    }
+   ]
+  },
+  {
+   "id": "v39",
+   "T": 99,
+   "a": 99.79,
+   "b": 100.12,
+   "text": "Pas.",
+   "chunks": [
+    {
+     "t0": 99.79,
+     "t1": 100.12,
+     "text": "Pas."
+    }
+   ]
+  },
+  {
+   "id": "v40",
+   "T": 100,
+   "a": 100.35,
+   "b": 101.84,
+   "text": "Seperti tadi sore.",
+   "chunks": [
+    {
+     "t0": 100.35,
+     "t1": 101.84,
+     "text": "Seperti tadi sore."
+    }
+   ]
+  },
+  {
+   "id": "v41",
+   "T": 101,
+   "a": 102.33,
+   "b": 103.79,
+   "text": "Kamu menghela napas lega.",
+   "chunks": [
+    {
+     "t0": 102.33,
+     "t1": 103.79,
+     "text": "Kamu menghela napas lega."
+    }
+   ]
+  },
+  {
+   "id": "v42",
+   "T": 103,
+   "a": 104.1,
+   "b": 106.47,
+   "text": "Lalu kamu sadar kenapa angkanya kembali tepat.",
+   "chunks": [
+    {
+     "t0": 104.1,
+     "t1": 105.355,
+     "text": "Lalu kamu sadar kenapa"
+    },
+    {
+     "t0": 105.355,
+     "t1": 106.47,
+     "text": "angkanya kembali tepat."
+    }
+   ]
+  },
+  {
+   "id": "v43",
+   "T": 106,
+   "a": 106.86,
+   "b": 109.91,
+   "text": "Matamu bergeser ke layar paling kecil di pojok kanan bawah.",
+   "chunks": [
+    {
+     "t0": 106.86,
+     "t1": 108.538,
+     "text": "Matamu bergeser ke layar paling"
+    },
+    {
+     "t0": 108.538,
+     "t1": 109.91,
+     "text": "kecil di pojok kanan bawah."
+    }
+   ]
+  },
+  {
+   "id": "v44",
+   "T": 109,
+   "a": 110.28,
+   "b": 111.3,
+   "text": "Kamera pos jaga.",
+   "chunks": [
+    {
+     "t0": 110.28,
+     "t1": 111.3,
+     "text": "Kamera pos jaga."
+    }
+   ]
+  },
+  {
+   "id": "v45",
+   "T": 111,
+   "a": 111.68,
+   "b": 113.55,
+   "text": "Ruangan yang sedang kamu duduki sekarang.",
+   "chunks": [
+    {
+     "t0": 111.68,
+     "t1": 113.55,
+     "text": "Ruangan yang sedang kamu duduki sekarang."
+    }
+   ]
+  },
+  {
+   "id": "v46",
+   "T": 113,
+   "a": 114.03,
+   "b": 114.74,
+   "text": "Ada meja.",
+   "chunks": [
+    {
+     "t0": 114.03,
+     "t1": 114.74,
+     "text": "Ada meja."
+    }
+   ]
+  },
+  {
+   "id": "v47",
+   "T": 114,
+   "a": 115.11,
+   "b": 115.81,
+   "text": "Ada kursi.",
+   "chunks": [
+    {
+     "t0": 115.11,
+     "t1": 115.81,
+     "text": "Ada kursi."
+    }
+   ]
+  },
+  {
+   "id": "v48",
+   "T": 116,
+   "a": 116.15,
+   "b": 116.77,
+   "text": "Ada kamu.",
+   "chunks": [
+    {
+     "t0": 116.15,
+     "t1": 116.77,
+     "text": "Ada kamu."
+    }
+   ]
+  },
+  {
+   "id": "v49",
+   "T": 117,
+   "a": 117.16,
+   "b": 119.79,
+   "text": "Dan di belakangmu berdiri manekin yang ketujuh.",
+   "chunks": [
+    {
+     "t0": 117.16,
+     "t1": 118.639,
+     "text": "Dan di belakangmu berdiri"
+    },
+    {
+     "t0": 118.639,
+     "t1": 119.79,
+     "text": "manekin yang ketujuh."
+    }
+   ]
+  },
+  {
+   "id": "v50",
+   "T": 120,
+   "a": 120.19,
+   "b": 121.56,
+   "text": "Kamu tidak berani menoleh.",
+   "chunks": [
+    {
+     "t0": 120.19,
+     "t1": 121.56,
+     "text": "Kamu tidak berani menoleh."
+    }
+   ]
+  },
+  {
+   "id": "v51",
+   "T": 121,
+   "a": 121.92,
+   "b": 125.39,
+   "text": "Di layar, tangannya terangkat perlahan menuju bahumu.",
+   "chunks": [
+    {
+     "t0": 121.92,
+     "t1": 122.498,
+     "text": "Di layar,"
+    },
+    {
+     "t0": 122.498,
+     "t1": 123.655,
+     "text": "tangannya terangkat"
+    },
+    {
+     "t0": 123.655,
+     "t1": 125.39,
+     "text": "perlahan menuju bahumu."
+    }
+   ]
+  }
+ ]
+}

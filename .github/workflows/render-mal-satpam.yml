@@ -1,0 +1,171 @@
+name: Render film mal satpam (HD-2D, 9:16)
+
+# Workflow untuk film "Semalam Jadi Penjaga Mal — Part 1".
+# Sumber dan pipeline ada di folder mal-satpam/; file ini hanya penempatan yang
+# diwajibkan GitHub (workflow harus di .github/workflows/ di root repo).
+#
+# Alur: plan (hitung potongan) -> prep (selaraskan caption dengan VO, buat audio)
+#       -> render (matrix, tiap job satu potongan frame) -> assemble (gabung + mux
+#       audio, loudness -14 LUFS) -> artifact "mal-satpam-final".
+on:
+  workflow_dispatch:
+    inputs:
+      preset:
+        description: "draft = 540x960 cepat untuk cek; final = 1080x1920 30 fps"
+        type: choice
+        options: [final, draft]
+        default: final
+      release:
+        description: "Unggah hasil juga ke GitHub Release"
+        type: boolean
+        default: false
+  push:
+    tags: ["v*"]
+
+permissions:
+  contents: write
+
+concurrency:
+  group: render-mal-satpam-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  LEMO_ANGLE: swiftshader          # WebGL perangkat lunak (runner GitHub tidak punya GPU)
+
+defaults:
+  run:
+    working-directory: mal-satpam
+
+jobs:
+  plan:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    outputs:
+      matrix: ${{ steps.p.outputs.matrix }}
+      fps: ${{ steps.p.outputs.fps }}
+      size: ${{ steps.p.outputs.size }}
+      q: ${{ steps.p.outputs.q }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 22 }
+      - id: p
+        run: |
+          PRESET="${{ github.event.inputs.preset || 'final' }}"
+          if [ "$PRESET" = "draft" ]; then FPS=15; SIZE=540x960; PER=90;  Q='ss=1&taps=32';
+          else                              FPS=30; SIZE=1080x1920; PER=120; Q='ss=1&taps=64'; fi
+          PLAN=$(node tools/plan.mjs --fps $FPS --per $PER)
+          echo "preset=$PRESET fps=$FPS size=$SIZE"; echo "$PLAN" | head -c 200; echo
+          echo "matrix=$(echo "$PLAN" | node -e 'let s="";process.stdin.on("data",d=>s+=d).on("end",()=>console.log(JSON.stringify({include:JSON.parse(s).chunks})))')" >> "$GITHUB_OUTPUT"
+          echo "fps=$FPS" >> "$GITHUB_OUTPUT"; echo "size=$SIZE" >> "$GITHUB_OUTPUT"; echo "q=$Q" >> "$GITHUB_OUTPUT"
+
+  prep:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 22 }
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.12" }
+      - name: Pasang ffmpeg + dependensi audio
+        run: |
+          sudo apt-get update -y && sudo apt-get install -y ffmpeg
+          python3 -m pip install --upgrade pip
+          python3 -m pip install numpy scipy
+      - name: Selaraskan caption dengan VO, ekspor peristiwa, mix audio, SRT
+        run: |
+          python3 tools/prep_vo.py
+          node tools/export_events.mjs
+          python3 tools/mix.py
+          python3 tools/srt.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: mal-satpam-data
+          if-no-files-found: error
+          path: |
+            mal-satpam/film/data/lines.json
+            mal-satpam/film/data/events.json
+            mal-satpam/out/mix.wav
+            mal-satpam/out/captions.srt
+
+  render:
+    needs: [plan, prep]
+    runs-on: ubuntu-24.04
+    timeout-minutes: 180
+    strategy:
+      fail-fast: false
+      max-parallel: 20
+      matrix: ${{ fromJSON(needs.plan.outputs.matrix) }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: mal-satpam/kit/package-lock.json
+      - name: Pasang dependensi + Chromium headless shell
+        working-directory: mal-satpam/kit
+        run: |
+          sudo apt-get update -y && sudo apt-get install -y ffmpeg
+          npm ci
+          npx playwright-core install --with-deps chromium-headless-shell
+      - uses: actions/download-artifact@v4
+        with: { name: mal-satpam-data, path: mal-satpam/_data }
+      - name: Taruh data hasil prep
+        run: |
+          LINES=$(find _data -name lines.json | head -1)
+          EVENTS=$(find _data -name events.json | head -1)
+          [ -n "$LINES" ] && [ -n "$EVENTS" ] || { echo "data prep tidak ditemukan"; exit 1; }
+          cp "$LINES" film/data/lines.json
+          cp "$EVENTS" film/data/events.json
+      - name: Render potongan ${{ matrix.i }} (frame ${{ matrix.a }}-${{ matrix.b }})
+        run: |
+          mkdir -p out
+          node tools/render_chunk.mjs --a ${{ matrix.a }} --b ${{ matrix.b }} --fps ${{ needs.plan.outputs.fps }} \
+            --size ${{ needs.plan.outputs.size }} --workers 2 --q '${{ needs.plan.outputs.q }}' \
+            --out out/chunk_$(printf %04d ${{ matrix.i }}).mp4
+      - uses: actions/upload-artifact@v4
+        with:
+          name: mal-satpam-chunk-${{ matrix.i }}
+          if-no-files-found: error
+          path: mal-satpam/out/chunk_*.mp4
+          retention-days: 2
+
+  assemble:
+    needs: [plan, render]
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: FedericoCarboni/setup-ffmpeg@v3     # mux.sh butuh ffmpeg >= 7
+        with: { ffmpeg-version: release }
+      - uses: actions/download-artifact@v4
+        with: { pattern: mal-satpam-chunk-*, path: mal-satpam/_chunks, merge-multiple: true }
+      - uses: actions/download-artifact@v4
+        with: { name: mal-satpam-data, path: mal-satpam/_data }
+      - name: Gabung potongan + mux audio
+        run: |
+          mkdir -p out && ls _chunks | sort | sed "s#^#file '$PWD/_chunks/#; s#\$#'#" > list.txt
+          ffmpeg -y -loglevel error -f concat -safe 0 -i list.txt -c copy out/video.mp4
+          FR=$(ffprobe -v error -count_frames -select_streams v:0 -show_entries stream=nb_read_frames -of csv=p=0 out/video.mp4)
+          echo "frame digabung: $FR"
+          MIX=$(find _data -name mix.wav | head -1); SRT=$(find _data -name captions.srt | head -1)
+          [ -n "$MIX" ] && [ -n "$SRT" ] || { echo "mix/caption tidak ditemukan"; exit 1; }
+          sh kit/core/render/mux.sh out/video.mp4 "$MIX" out/final.mp4 ${{ needs.plan.outputs.fps }} 0
+          cp "$SRT" out/captions.srt
+          ffmpeg -y -loglevel error -ss 59 -i out/final.mp4 -frames:v 1 out/poster.jpg
+      - uses: actions/upload-artifact@v4
+        with:
+          name: mal-satpam-final
+          if-no-files-found: error
+          path: |
+            mal-satpam/out/final.mp4
+            mal-satpam/out/captions.srt
+            mal-satpam/out/poster.jpg
+      - name: GitHub Release (opsional)
+        if: ${{ github.event.inputs.release == 'true' || startsWith(github.ref, 'refs/tags/') }}
+        env: { GH_TOKEN: "${{ github.token }}" }
+        run: |
+          TAG="${GITHUB_REF_NAME}"; [ "${GITHUB_REF_TYPE}" = "tag" ] || TAG="mal-satpam-${{ github.run_number }}"
+          gh release create "$TAG" out/final.mp4 out/captions.srt out/poster.jpg --title "Semalam Jadi Penjaga Mal - Part 1 ($TAG)" --notes "Dirender otomatis oleh GitHub Actions." || gh release upload "$TAG" out/final.mp4 out/captions.srt out/poster.jpg --clobber

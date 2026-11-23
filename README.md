@@ -26,6 +26,10 @@ Alur workflow:
 - **render** — matriks job, tiap job merender satu rentang frame dengan Playwright + Chromium (SwiftShader di runner).
 - **final** — gabung potongan, loudnorm −14 LUFS, buat poster, unggah artifact.
 
+## Film lain: Semalam Jadi Penjaga Mal — Part 1
+
+Sumber film horor 9:16 ini ada di folder `mal-satpam/` (VO, naskah, transkrip, dan pipeline HD-2D sendiri). Workflow-nya ada di `.github/workflows/render-mal-satpam.yml` dan dijalankan lewat **Actions → Render film mal satpam (HD-2D, 9:16) → Run workflow**. Hasil akhirnya di artifact **`mal-satpam-final`**: `final.mp4` 1080×1920 30 fps, `captions.srt`, dan `poster.jpg`.
+
 ## Kredit & lisensi
 
 - Mesin gaya HD-2D di `vendor/` dan sebagian `tools/`: Lemo-Opuscar (MIT). Kredit teknis lengkap ada di `NOTICE`; **tidak ditampilkan di layar**.

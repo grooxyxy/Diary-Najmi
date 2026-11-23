@@ -1,0 +1,103 @@
+SEMALAM JADI PENJAGA MAL
+Naskah narasi TikTok (portrait 9:16) | Part 1 | Horor ringan
+Narasi orang kedua ("kamu") | Perkiraan durasi: 2,5-3 menit dengan narator pelan
+
+Catatan: teks dalam [kurung siku] adalah panduan visual, bukan untuk dibacakan.
+Semua teks di luar kurung siku adalah narasi.
+
+================================================================
+HOOK (0:00-0:10)
+================================================================
+
+[Diorama mal lima lantai dilihat dari atas dan jauh, hampir semua jendela gelap, satu sosok mungil dengan senter di atrium.]
+
+Pukul 23.40. Lampu toko padam satu per satu, dan kamu baru sadar: kamu satu-satunya orang yang tersisa di gedung lima lantai ini.
+
+================================================================
+LANTAI SATU
+================================================================
+
+[Kamera pelan mendekat ke atrium, air mancur, eskalator yang berhenti satu per satu.]
+
+Tugasmu sederhana. Keliling setiap lantai, cek pintu toko, matikan eskalator, lalu duduk di pos jaga sampai pagi.
+
+Senter di tanganmu kecil. Cahayanya hanya cukup untuk dua langkah ke depan.
+
+Lantai satu sunyi. Air mancur di tengah atrium masih mengalir, dan suaranya terlalu keras untuk ruangan sekosong ini.
+
+Eskalator berhenti satu per satu. Bunyi berhentinya menggema sampai ke lantai paling atas.
+
+================================================================
+LANTAI DUA
+================================================================
+
+[Kamera naik satu lantai, deretan etalase kaca, manekin di baliknya, cahaya senter menyapu pelan.]
+
+Kamu naik ke lantai dua. Deretan toko pakaian, etalase kaca, dan manekin yang berdiri kaku di baliknya.
+
+Tanpa sadar, kamu mulai menghitung. Satu, dua, tiga, empat, lima, enam, tujuh.
+
+Tujuh manekin di etalase paling ujung.
+
+Kamu berhenti.
+
+Tadi sore, kamu yakin hanya ada enam.
+
+Mungkin salah hitung. Kamu melangkah pergi, sedikit lebih cepat dari sebelumnya.
+
+================================================================
+LANTAI TIGA
+================================================================
+
+[Kamera naik lagi, toko mainan, rak penuh boneka, satu kotak musik kecil di tepi rak.]
+
+Lantai tiga. Toko mainan.
+
+Di sebuah rak, kotak musik kecil berbunyi sendiri. Melodinya pelan dan tersendat-sendat, seperti dimainkan oleh seseorang yang tidak hafal lagunya.
+
+Kamu menutup tutupnya. Sunyi.
+
+Kamu berjalan menjauh. Lima langkah. Sepuluh.
+
+Lagu itu mulai lagi.
+
+Dan kali ini, suaranya datang dari belakangmu.
+
+================================================================
+POS JAGA
+================================================================
+
+[Kamera turun cepat ke pos jaga di lantai dasar, layar CCTV menyala, cahaya biru di wajah sosok mungil.]
+
+Kamu tidak naik ke lantai empat. Kamu turun, hampir berlari, kembali ke pos jaga dan menyalakan layar CCTV.
+
+Lantai satu, kosong. Lantai tiga, kosong. Kotak musik, tertutup rapat.
+
+Lantai dua. Etalase pakaian. Kamu menghitung lagi: satu, dua, tiga, empat, lima, enam.
+
+Enam.
+
+Pas, seperti tadi sore. Kamu menghela napas lega.
+
+Lalu kamu sadar kenapa angkanya kembali tepat.
+
+Matamu bergeser ke layar paling kecil di pojok kanan bawah: kamera pos jaga. Ruangan yang sedang kamu duduki sekarang.
+
+Ada meja. Ada kursi. Ada kamu.
+
+Dan di belakangmu, berdiri manekin yang ketujuh.
+
+Kamu tidak berani menoleh.
+
+Di layar, tangannya terangkat perlahan, menuju bahumu.
+
+[Layar hitam. Tampilkan teks: "Bersambung ke Part 2".]
+
+================================================================
+CATATAN PRODUKSI
+================================================================
+
+- Hitungan manekin (enam, lalu tujuh, lalu enam, lalu tujuh di belakang) adalah benang utama cerita; jaga konsisten antar shot.
+- Senter sebagai satu-satunya sumber cahaya utama: terangnya bisa dibuat meredup tiap kali ada kejadian janggal.
+- Untuk layar potret, taruh caption narasi di atas area UI TikTok (narrBottom sekitar 250 pada makeCaptions).
+- Cerita tetap bisa dilanjut: Part 2 bisa naik ke lantai empat dan lima.
