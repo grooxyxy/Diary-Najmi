@@ -1,0 +1,189 @@
+name: Render film penjaga gerbang (HD-2D)
+
+# Workflow untuk film "Sehari Jadi Penjaga Gerbang Kota".
+# Sumber dan pipeline ada di folder penjaga-gerbang/; file ini hanya penempatan
+# yang diwajibkan GitHub (workflow harus di .github/workflows/ di root repo).
+#
+# Alur: plan -> audio (align naskah/SRT + mix) ∥ render (matriks shard)
+#       -> finish (gabung + mux + loudnorm -14 LUFS) -> artifact film.
+on:
+  workflow_dispatch:
+    inputs:
+      preset:
+        description: 'Kualitas: draft (960x540 12fps) | standard (1280x720 24fps) | full (1920x1080 24fps)'
+        type: choice
+        options: [draft, standard, full]
+        default: standard
+      shards:
+        description: 'Jumlah shard paralel (1-20)'
+        default: '20'
+      from_s:
+        description: 'Opsional: render sebagian saja, mulai detik ke- (kosongkan = seluruh film)'
+        default: ''
+      to_s:
+        description: 'Opsional: sampai detik ke-'
+        default: ''
+      lead:
+        description: 'Detik pembuka sebelum narasi mulai (judul/ambience)'
+        default: '3.0'
+      publish_release:
+        description: 'Terbitkan hasil sebagai GitHub Release (agar tidak kedaluwarsa)'
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+
+concurrency:
+  group: render-penjaga-gerbang-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  LEMO_ANGLE: swiftshader
+
+defaults:
+  run:
+    working-directory: penjaga-gerbang
+
+jobs:
+  plan:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    outputs:
+      matrix: ${{ steps.p.outputs.matrix }}
+      size: ${{ steps.p.outputs.size }}
+      fps: ${{ steps.p.outputs.fps }}
+      q: ${{ steps.p.outputs.q }}
+    steps:
+      - uses: actions/checkout@v4
+      - id: p
+        run: |
+          case "${{ inputs.preset }}" in
+            draft)    SIZE=960x540;   FPS=12; Q='taps=16&sm=1024';;
+            standard) SIZE=1280x720;  FPS=24; Q='taps=28&sm=2048';;
+            full)     SIZE=1920x1080; FPS=24; Q='taps=40&sm=2048';;
+            *) echo "preset tidak dikenal: ${{ inputs.preset }}"; exit 2;;
+          esac
+          N="${{ inputs.shards }}"
+          case "$N" in ''|*[!0-9]*) echo "shards harus angka 1-20"; exit 2;; esac
+          [ "$N" -ge 1 ] && [ "$N" -le 20 ] || { echo "shards harus 1-20"; exit 2; }
+          echo "matrix=$(python3 -c "import json;print(json.dumps(list(range($N))))")" >> "$GITHUB_OUTPUT"
+          echo "size=$SIZE" >> "$GITHUB_OUTPUT"; echo "fps=$FPS" >> "$GITHUB_OUTPUT"
+          echo "q=$Q&lead=${{ inputs.lead }}" >> "$GITHUB_OUTPUT"
+          echo "preset=${{ inputs.preset }} size=$SIZE fps=$FPS shards=$N lead=${{ inputs.lead }}"
+
+  audio:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: '3.12' }
+      - uses: FedericoCarboni/setup-ffmpeg@v3
+        with: { ffmpeg-version: release }
+      - name: Dependensi audio
+        run: python3 -m pip install numpy scipy
+      - name: Selaraskan naskah dengan SRT
+        run: python3 film/tools/align.py --lead ${{ inputs.lead }}
+      - name: Mix musik, ambience, efek, dan VO
+        run: python3 film/tools/mix.py --lead ${{ inputs.lead }}
+      - uses: actions/upload-artifact@v4
+        with:
+          name: penjaga-gerbang-audio
+          if-no-files-found: error
+          path: |
+            penjaga-gerbang/film/out/mix.wav
+            penjaga-gerbang/film/out/film.srt
+            penjaga-gerbang/film/out/naskah-vo.srt
+            penjaga-gerbang/film/timing.json
+
+  render:
+    needs: [plan]
+    runs-on: ubuntu-24.04
+    timeout-minutes: 350
+    strategy:
+      fail-fast: false
+      max-parallel: 20
+      matrix:
+        shard: ${{ fromJSON(needs.plan.outputs.matrix) }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: penjaga-gerbang/kit/package-lock.json
+      - uses: actions/setup-python@v5
+        with: { python-version: '3.12' }
+      - uses: FedericoCarboni/setup-ffmpeg@v3
+        with: { ffmpeg-version: release }
+      - name: Dependensi kit + Chromium
+        working-directory: penjaga-gerbang/kit
+        run: |
+          npm ci --no-audit --no-fund
+          npx playwright-core install --with-deps chromium
+      - name: Selaraskan naskah dengan SRT (timing.json)
+        run: python3 film/tools/align.py --lead ${{ inputs.lead }}
+      - name: Render shard ${{ matrix.shard }}
+        run: |
+          RANGE=""
+          [ -n "${{ inputs.from_s }}" ] && RANGE="--from ${{ inputs.from_s }}"
+          [ -n "${{ inputs.to_s }}" ] && RANGE="$RANGE --to ${{ inputs.to_s }}"
+          node film/tools/render_shard.mjs film \
+            --fps ${{ needs.plan.outputs.fps }} --size ${{ needs.plan.outputs.size }} \
+            --q '${{ needs.plan.outputs.q }}' \
+            --shard ${{ matrix.shard }}/${{ inputs.shards }} --workers 2 $RANGE \
+            --out film/out/shard_$(printf %03d ${{ matrix.shard }}).mp4
+      - uses: actions/upload-artifact@v4
+        with:
+          name: penjaga-gerbang-shard-${{ matrix.shard }}
+          path: penjaga-gerbang/film/out/shard_*.mp4
+          if-no-files-found: ignore
+          retention-days: 3
+
+  finish:
+    needs: [plan, audio, render]
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - uses: FedericoCarboni/setup-ffmpeg@v3
+        with: { ffmpeg-version: release }
+      - uses: actions/download-artifact@v4
+        with: { pattern: penjaga-gerbang-shard-*, path: penjaga-gerbang/film/out, merge-multiple: true }
+      - uses: actions/download-artifact@v4
+        with: { name: penjaga-gerbang-audio, path: penjaga-gerbang/audio }
+      - name: Gabung shard + mux audio (-14 LUFS)
+        run: |
+          cd film/out && ls shard_*.mp4 | sort | sed "s/^/file '/;s/$/'/" > shards.txt
+          ffmpeg -y -loglevel error -f concat -safe 0 -i shards.txt -c copy video.mp4
+          cd ../..
+          MIX=$(find audio -name mix.wav | head -1)
+          SRT=$(find audio -name film.srt | head -1)
+          NSRT=$(find audio -name naskah-vo.srt | head -1)
+          [ -n "$MIX" ] && [ -n "$SRT" ] && [ -n "$NSRT" ] || { echo "mix/SRT tidak ditemukan"; exit 1; }
+          AUD="$MIX"
+          if [ -n "${{ inputs.from_s }}" ]; then
+            S=${{ inputs.from_s }}; E=${{ inputs.to_s }}
+            ffmpeg -y -loglevel error -ss "$S" ${E:+-to "$E"} -i "$AUD" film/out/mix_cut.wav; AUD=film/out/mix_cut.wav
+          fi
+          sh kit/core/render/mux.sh film/out/video.mp4 "$AUD" film/out/film.mp4 ${{ needs.plan.outputs.fps }} 1
+          cp "$SRT" "$NSRT" film/out/
+      - uses: actions/upload-artifact@v4
+        with:
+          name: penjaga-gerbang-film-${{ inputs.preset }}
+          if-no-files-found: error
+          path: |
+            penjaga-gerbang/film/out/film.mp4
+            penjaga-gerbang/film/out/film.srt
+            penjaga-gerbang/film/out/naskah-vo.srt
+      - name: Terbitkan Release
+        if: ${{ inputs.publish_release }}
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: penjaga-gerbang-${{ inputs.preset }}-${{ github.run_number }}
+          name: Sehari Jadi Penjaga Gerbang Kota (${{ inputs.preset }})
+          files: |
+            penjaga-gerbang/film/out/film.mp4
+            penjaga-gerbang/film/out/film.srt
+            penjaga-gerbang/film/out/naskah-vo.srt

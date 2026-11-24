@@ -1,0 +1,166 @@
+name: Render film (Sehari Jadi Penjaga Gerbang Kota)
+
+# CATATAN: file ini adalah workflow asli paket, untuk pemakaian folder
+# penjaga-gerbang/ sebagai repo terpisah. Di repo Diary-Najmi, GitHub hanya
+# membaca workflow di .github/workflows/ root, jadi yang dipakai adalah
+# render-penjaga-gerbang.yml di sana.
+#
+# Jalankan dari tab Actions → "Render film" → Run workflow.
+# Pipeline: plan → audio (align naskah/SRT + mix) ∥ render (matriks shard, paralel) → finish (gabung + mux + loudnorm).
+on:
+  workflow_dispatch:
+    inputs:
+      preset:
+        description: 'Kualitas: draft (960x540 12fps, cepat) | standard (1280x720 24fps) | full (1920x1080 24fps)'
+        type: choice
+        options: [draft, standard, full]
+        default: standard
+      shards:
+        description: 'Jumlah shard paralel (maks. 20 untuk akun gratis)'
+        default: '10'
+      from_s:
+        description: 'Opsional: render sebagian saja, mulai detik ke- (kosongkan = seluruh film)'
+        default: ''
+      to_s:
+        description: 'Opsional: sampai detik ke-'
+        default: ''
+      lead:
+        description: 'Detik pembuka sebelum narasi mulai (judul/ambience)'
+        default: '3.0'
+      publish_release:
+        description: 'Terbitkan hasil sebagai GitHub Release (agar tidak kedaluwarsa)'
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+
+env:
+  LEMO_ANGLE: swiftshader
+
+jobs:
+  plan:
+    runs-on: ubuntu-24.04
+    outputs:
+      matrix: ${{ steps.p.outputs.matrix }}
+      size: ${{ steps.p.outputs.size }}
+      fps: ${{ steps.p.outputs.fps }}
+      q: ${{ steps.p.outputs.q }}
+    steps:
+      - id: p
+        run: |
+          case "${{ inputs.preset }}" in
+            draft)    SIZE=960x540;   FPS=12; Q='taps=16&sm=1024';;
+            standard) SIZE=1280x720;  FPS=24; Q='taps=28&sm=2048';;
+            full)     SIZE=1920x1080; FPS=24; Q='taps=40&sm=2048';;
+          esac
+          N=${{ inputs.shards }}
+          echo "matrix=$(python3 -c "import json;print(json.dumps(list(range($N))))")" >> $GITHUB_OUTPUT
+          echo "size=$SIZE" >> $GITHUB_OUTPUT; echo "fps=$FPS" >> $GITHUB_OUTPUT; echo "q=$Q&lead=${{ inputs.lead }}" >> $GITHUB_OUTPUT
+
+  audio:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: '3.12' }
+      - name: ffmpeg terbaru
+        run: |
+          curl -fsSL https://github.com/BtbN/FFmpeg-Builds/releases/download/latest/ffmpeg-master-latest-linux64-gpl.tar.xz | tar -xJ
+          sudo cp ffmpeg-master-latest-linux64-gpl/bin/ffmpeg ffmpeg-master-latest-linux64-gpl/bin/ffprobe /usr/local/bin/
+      - run: pip install numpy scipy
+      - run: python3 film/tools/align.py --lead ${{ inputs.lead }}
+      - run: python3 film/tools/mix.py --lead ${{ inputs.lead }}
+      - uses: actions/upload-artifact@v4
+        with:
+          name: audio
+          path: |
+            film/out/mix.wav
+            film/out/film.srt
+            film/out/naskah-vo.srt
+            film/timing.json
+
+  render:
+    needs: plan
+    runs-on: ubuntu-24.04
+    timeout-minutes: 350
+    strategy:
+      fail-fast: false
+      matrix:
+        shard: ${{ fromJSON(needs.plan.outputs.matrix) }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: '22' }
+      - uses: actions/setup-python@v5
+        with: { python-version: '3.12' }
+      - name: ffmpeg terbaru
+        run: |
+          curl -fsSL https://github.com/BtbN/FFmpeg-Builds/releases/download/latest/ffmpeg-master-latest-linux64-gpl.tar.xz | tar -xJ
+          sudo cp ffmpeg-master-latest-linux64-gpl/bin/ffmpeg ffmpeg-master-latest-linux64-gpl/bin/ffprobe /usr/local/bin/
+      - name: Dependensi kit + Chromium
+        working-directory: kit
+        run: |
+          npm ci --no-audit --no-fund
+          npx playwright-core install --with-deps chromium
+      - name: Selaraskan naskah ↔ SRT (timing.json)
+        run: python3 film/tools/align.py --lead ${{ inputs.lead }}
+      - name: Render shard ${{ matrix.shard }}
+        run: |
+          RANGE=""
+          [ -n "${{ inputs.from_s }}" ] && RANGE="--from ${{ inputs.from_s }}"
+          [ -n "${{ inputs.to_s }}" ] && RANGE="$RANGE --to ${{ inputs.to_s }}"
+          node film/tools/render_shard.mjs film \
+            --fps ${{ needs.plan.outputs.fps }} --size ${{ needs.plan.outputs.size }} \
+            --q '${{ needs.plan.outputs.q }}' \
+            --shard ${{ matrix.shard }}/${{ inputs.shards }} --workers 2 $RANGE \
+            --out film/out/shard_$(printf %03d ${{ matrix.shard }}).mp4
+      - uses: actions/upload-artifact@v4
+        with:
+          name: shard-${{ matrix.shard }}
+          path: film/out/shard_*.mp4
+          if-no-files-found: ignore
+          retention-days: 3
+
+  finish:
+    needs: [plan, audio, render]
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - name: ffmpeg terbaru
+        run: |
+          curl -fsSL https://github.com/BtbN/FFmpeg-Builds/releases/download/latest/ffmpeg-master-latest-linux64-gpl.tar.xz | tar -xJ
+          sudo cp ffmpeg-master-latest-linux64-gpl/bin/ffmpeg ffmpeg-master-latest-linux64-gpl/bin/ffprobe /usr/local/bin/
+      - uses: actions/download-artifact@v4
+        with: { pattern: shard-*, path: film/out, merge-multiple: true }
+      - uses: actions/download-artifact@v4
+        with: { name: audio, path: audio }
+      - name: Gabung shard + mux audio (−14 LUFS)
+        run: |
+          cd film/out && ls shard_*.mp4 | sort | sed "s/^/file '/;s/$/'/" > shards.txt
+          ffmpeg -y -loglevel error -f concat -safe 0 -i shards.txt -c copy video.mp4
+          cd ../..
+          AUD=audio/film/out/mix.wav
+          if [ -n "${{ inputs.from_s }}" ]; then
+            S=${{ inputs.from_s }}; E=${{ inputs.to_s }}
+            ffmpeg -y -loglevel error -ss "$S" ${E:+-to "$E"} -i "$AUD" film/out/mix_cut.wav; AUD=film/out/mix_cut.wav
+          fi
+          sh kit/core/render/mux.sh film/out/video.mp4 "$AUD" film/out/film.mp4 ${{ needs.plan.outputs.fps }} 1
+          cp audio/film/out/film.srt audio/film/out/naskah-vo.srt film/out/
+      - uses: actions/upload-artifact@v4
+        with:
+          name: film-${{ inputs.preset }}
+          path: |
+            film/out/film.mp4
+            film/out/film.srt
+            film/out/naskah-vo.srt
+      - name: Terbitkan Release
+        if: ${{ inputs.publish_release }}
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: film-${{ inputs.preset }}-${{ github.run_number }}
+          name: Sehari Jadi Penjaga Gerbang Kota (${{ inputs.preset }})
+          files: |
+            film/out/film.mp4
+            film/out/film.srt
+            film/out/naskah-vo.srt

@@ -30,6 +30,10 @@ Alur workflow:
 
 Sumber film horor 9:16 ini ada di folder `mal-satpam/` (VO, naskah, transkrip, dan pipeline HD-2D sendiri). Workflow-nya ada di `.github/workflows/render-mal-satpam.yml` dan dijalankan lewat **Actions → Render film mal satpam (HD-2D, 9:16) → Run workflow**. Hasil akhirnya di artifact **`mal-satpam-final`**: `final.mp4` 1080×1920 30 fps, `captions.srt`, dan `poster.jpg`.
 
+## Film lain: Sehari Jadi Penjaga Gerbang Kota
+
+Sumber film 16:9 ±6 menit ini ada di folder `penjaga-gerbang/` (VO, naskah, SRT, dan pipeline HD-2D sendiri). Workflow-nya ada di `.github/workflows/render-penjaga-gerbang.yml` dan dijalankan lewat **Actions → Render film penjaga gerbang (HD-2D) → Run workflow**. Preset default `standard` (1280×720, 24 fps, 20 shard); hasilnya di artifact **`penjaga-gerbang-film-standard`**: `film.mp4`, `film.srt`, dan `naskah-vo.srt`.
+
 ## Kredit & lisensi
 
 - Mesin gaya HD-2D di `vendor/` dan sebagian `tools/`: Lemo-Opuscar (MIT). Kredit teknis lengkap ada di `NOTICE`; **tidak ditampilkan di layar**.
