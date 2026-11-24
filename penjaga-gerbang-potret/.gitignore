@@ -1,0 +1,6 @@
+node_modules/
+film/out/
+film/stills/
+*.lock
+.seg-*
+.DS_Store

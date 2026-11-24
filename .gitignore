@@ -10,6 +10,11 @@ audio/
 !penjaga-gerbang/kit/core/audio/pluck.py
 !penjaga-gerbang/kit/core/audio/sampler.py
 !penjaga-gerbang/kit/core/audio/sfx.py
+!penjaga-gerbang-potret/kit/core/audio/
+!penjaga-gerbang-potret/kit/core/audio/INSTRUMENTS.md
+!penjaga-gerbang-potret/kit/core/audio/pluck.py
+!penjaga-gerbang-potret/kit/core/audio/sampler.py
+!penjaga-gerbang-potret/kit/core/audio/sfx.py
 voices/*.wav
 voices/raw/
 voices/dur.json

@@ -34,6 +34,10 @@ Sumber film horor 9:16 ini ada di folder `mal-satpam/` (VO, naskah, transkrip, d
 
 Sumber film 16:9 ±6 menit ini ada di folder `penjaga-gerbang/` (VO, naskah, SRT, dan pipeline HD-2D sendiri). Workflow-nya ada di `.github/workflows/render-penjaga-gerbang.yml` dan dijalankan lewat **Actions → Render film penjaga gerbang (HD-2D) → Run workflow**. Preset default `standard` (1280×720, 24 fps, 20 shard); hasilnya di artifact **`penjaga-gerbang-film-standard`**: `film.mp4`, `film.srt`, dan `naskah-vo.srt`.
 
+### Versi potret 9:16
+
+Versi potret dari film yang sama ada di folder `penjaga-gerbang-potret/` (kamera otomatis mundur/melebar, judul dan caption dibungkus untuk layar tegak). Workflow-nya ada di `.github/workflows/render-penjaga-gerbang-potret.yml` dan dijalankan lewat **Actions → Render film penjaga gerbang potret (HD-2D 9:16) → Run workflow**. Default: potret, preset `standard` (720×1280, 24 fps, 20 shard); hasilnya di artifact **`penjaga-gerbang-potret-film-standard`**: `film.mp4`, `film.srt`, dan `naskah-vo.srt`.
+
 ## Kredit & lisensi
 
 - Mesin gaya HD-2D di `vendor/` dan sebagian `tools/`: Lemo-Opuscar (MIT). Kredit teknis lengkap ada di `NOTICE`; **tidak ditampilkan di layar**.
