@@ -1,0 +1,83 @@
+name: Render Najmi Ep01 (3D vector 9:16)
+
+# Workflow untuk "Najmi — Episode 01: Pintu di Belakang Rumah".
+# Sumber dan pipeline ada di folder najmi-ep01/; file ini hanya penempatan
+# yang diwajibkan GitHub (workflow harus di .github/workflows/ root).
+#
+# Alur: render (8 segmen paralel) -> assemble (gabung + teks + audio).
+on:
+  workflow_dispatch:
+    inputs:
+      fps:
+        description: 'Frame per detik hasil render (24 = halus, 12 = cepat)'
+        default: '24'
+      size:
+        description: 'Ukuran video LxT (9:16)'
+        default: '1080x1920'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: render-najmi-ep01-${{ github.ref }}
+  cancel-in-progress: true
+
+defaults:
+  run:
+    working-directory: najmi-ep01
+
+jobs:
+  render:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 180
+    strategy:
+      fail-fast: false
+      matrix:
+        seg: [s01a, s01b, s02, s03, s04, s05, s06, s07]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: '22' }
+      - name: Install ffmpeg
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ffmpeg
+      - name: Install Node dependencies
+        run: npm install --no-audit --no-fund
+      - name: Install Chromium
+        run: npx playwright install --with-deps chromium
+      - name: Render segmen ${{ matrix.seg }}
+        run: node scripts/render-scene.mjs ${{ matrix.seg }} --fps ${{ inputs.fps }} --size ${{ inputs.size }}
+      - uses: actions/upload-artifact@v4
+        with:
+          name: najmi-ep01-seg-${{ matrix.seg }}
+          path: najmi-ep01/out/${{ matrix.seg }}.mp4
+          if-no-files-found: error
+          retention-days: 3
+
+  assemble:
+    needs: render
+    runs-on: ubuntu-24.04
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: '22' }
+      - name: Install ffmpeg + font subtitle
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ffmpeg fonts-dejavu-core
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: najmi-ep01-seg-*
+          path: najmi-ep01/out
+          merge-multiple: true
+      - name: Gabung segmen + teks + audio
+        run: bash scripts/assemble.sh
+      - uses: actions/upload-artifact@v4
+        with:
+          name: najmi-ep01
+          if-no-files-found: error
+          path: |
+            najmi-ep01/out/najmi-ep01.mp4
+            najmi-ep01/out/najmi-ep01-notext.mp4

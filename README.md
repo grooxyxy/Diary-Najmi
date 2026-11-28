@@ -38,6 +38,10 @@ Sumber film 16:9 ±6 menit ini ada di folder `penjaga-gerbang/` (VO, naskah, SRT
 
 Versi potret dari film yang sama ada di folder `penjaga-gerbang-potret/` (kamera otomatis mundur/melebar, judul dan caption dibungkus untuk layar tegak). Workflow-nya ada di `.github/workflows/render-penjaga-gerbang-potret.yml` dan dijalankan lewat **Actions → Render film penjaga gerbang potret (HD-2D 9:16) → Run workflow**. Default: potret, preset `standard` (720×1280, 24 fps, 20 shard); hasilnya di artifact **`penjaga-gerbang-potret-film-standard`**: `film.mp4`, `film.srt`, dan `naskah-vo.srt`.
 
+## Film lain: Najmi — Episode 01: Pintu di Belakang Rumah
+
+Sumber animasi 3D-vector 9:16 ±3,3 menit ini ada di folder `najmi-ep01/` (VO, SRT, dan pipeline render 8 segmen sendiri). Workflow-nya ada di `.github/workflows/render-najmi-ep01.yml` dan dijalankan lewat **Actions → Render Najmi Ep01 (3D vector 9:16) → Run workflow**. Default: 1080×1920, 24 fps; hasilnya di artifact **`najmi-ep01`**: `najmi-ep01.mp4` (teks terbakar) dan `najmi-ep01-notext.mp4`.
+
 ## Kredit & lisensi
 
 - Mesin gaya HD-2D di `vendor/` dan sebagian `tools/`: Lemo-Opuscar (MIT). Kredit teknis lengkap ada di `NOTICE`; **tidak ditampilkan di layar**.

@@ -1,0 +1,60 @@
+name: Render Najmi Ep01
+
+# CATATAN: file ini adalah workflow asli paket, untuk pemakaian folder
+# najmi-ep01/ sebagai repo terpisah. Di repo Diary-Najmi, GitHub hanya
+# membaca workflow di .github/workflows/ root, jadi yang dipakai adalah
+# render-najmi-ep01.yml di sana.
+
+on:
+  workflow_dispatch:
+    inputs:
+      fps:
+        description: "Frame per detik hasil render (24 = halus, 12 = cepat)"
+        default: "24"
+      size:
+        description: "Ukuran video LxT (9:16)"
+        default: "1080x1920"
+
+env:
+  FPS: ${{ inputs.fps || '24' }}
+  SIZE: ${{ inputs.size || '1080x1920' }}
+
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    strategy:
+      fail-fast: false
+      matrix:
+        seg: [s01a, s01b, s02, s03, s04, s05, s06, s07]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 22 }
+      - run: sudo apt-get update && sudo apt-get install -y ffmpeg
+      - run: npm install
+      - run: npx playwright install --with-deps chromium
+      - run: node scripts/render-scene.mjs ${{ matrix.seg }} --fps $FPS --size $SIZE
+      - uses: actions/upload-artifact@v4
+        with:
+          name: seg-${{ matrix.seg }}
+          path: out/${{ matrix.seg }}.mp4
+          retention-days: 3
+
+  assemble:
+    needs: render
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 22 }
+      - run: sudo apt-get update && sudo apt-get install -y ffmpeg fonts-dejavu-core
+      - uses: actions/download-artifact@v4
+        with: { pattern: "seg-*", path: out, merge-multiple: true }
+      - run: scripts/assemble.sh
+      - uses: actions/upload-artifact@v4
+        with:
+          name: najmi-ep01
+          path: |
+            out/najmi-ep01.mp4
+            out/najmi-ep01-notext.mp4

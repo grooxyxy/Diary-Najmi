@@ -15,6 +15,10 @@ audio/
 !penjaga-gerbang-potret/kit/core/audio/pluck.py
 !penjaga-gerbang-potret/kit/core/audio/sampler.py
 !penjaga-gerbang-potret/kit/core/audio/sfx.py
+!najmi-ep01/audio/
+!najmi-ep01/audio/vo.wav
+!najmi-ep01/audio/vo.srt
+!najmi-ep01/audio/vo.id.srt
 voices/*.wav
 voices/raw/
 voices/dur.json
